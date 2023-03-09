@@ -2,7 +2,9 @@
 
 This is a pet channelling mobile application
 
-## Features🔥
+## Architecture Diagram
+
+## Features
 
 - Login
 - Signup
