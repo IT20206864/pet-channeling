@@ -10,6 +10,9 @@ const Home = ({ navigation }) => {
         <Button title="view Staff" onPress={() => navigation.navigate('ViewStaff')}></Button>
       </TouchableHighlight>
       <TouchableHighlight style={styles.buttonContainer}>
+        <Button title="Reviews" onPress={() => navigation.navigate('Reviews')}></Button>
+      </TouchableHighlight>
+      <TouchableHighlight style={styles.buttonContainer}>
         <Button
           title="Staff Management"
           onPress={() => navigation.navigate('StaffManagement')}
