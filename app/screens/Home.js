@@ -1,10 +1,40 @@
-import React from 'react'
-import { Text } from 'react-native'
+import { Button, View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
-function Home() {
+const Home = ({ navigation }) => {
   return (
-    <Text>Home</Text>
-  )
-}
+    <View style={styles.container}>
+      <TouchableHighlight style={styles.buttonContainer}>
+        <Button title="Add Staff" onPress={() => navigation.navigate('AddStaff')}></Button>
+      </TouchableHighlight>
+      <TouchableHighlight style={styles.buttonContainer}>
+        <Button title="view Staff" onPress={() => navigation.navigate('ViewStaff')}></Button>
+      </TouchableHighlight>
+      <TouchableHighlight style={styles.buttonContainer}>
+        <Button
+          title="Staff Management"
+          onPress={() => navigation.navigate('StaffManagement')}
+        ></Button>
+      </TouchableHighlight>
+    </View>
+  );
+};
 
-export default Home
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  buttonContainer: {
+    height: 40,
+    width: '100%',
+    borderRadius: 10,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 20,
+  },
+});
+
+export default Home;
