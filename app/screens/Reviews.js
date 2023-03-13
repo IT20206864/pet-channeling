@@ -73,13 +73,13 @@ function Reviews({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.header}>
+      {/*       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn}>
           <MaterialCommunityIcons name="keyboard-backspace" size={28} color="black" />
         </TouchableOpacity>
 
         <Text style={styles.headerTitle}>Reviews & Feedbacks</Text>
-      </View>
+      </View> */}
       <ScrollView
         contentContainerStyle={styles.scrollView}
         onScroll={onScroll}
@@ -107,7 +107,7 @@ function Reviews({ navigation }) {
           </View>
           <TouchableNativeFeedback
             style={{ width: '100%' }}
-            onPress={() => navigation.navigate('WriteReview')}
+            onPress={() => navigation.navigate('Write Review')}
           >
             <View style={styles.writeReviewBtn}>
               <Text style={styles.writeReviewBtnTxt}>Write a Review</Text>

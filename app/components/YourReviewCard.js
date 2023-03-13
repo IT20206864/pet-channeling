@@ -97,7 +97,7 @@ function YourReviewCard({ review, email, fetchData, navigation }) {
       <View style={styles.highlightedReviewHeader}>
         <Text style={styles.highlightedReviewHeaderTxt}>Your Review</Text>
         <View style={styles.highlightedReviewHeaderActions}>
-          <TouchableOpacity onPress={() => navigation.navigate('EditReview', { review })}>
+          <TouchableOpacity onPress={() => navigation.navigate('Edit Review', { review })}>
             <AntDesign name="edit" size={20} color="#fff" style={{ marginRight: 20 }} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => confirmDelete(review.id)}>

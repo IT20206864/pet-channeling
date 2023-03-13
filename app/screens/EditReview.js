@@ -129,13 +129,13 @@ function EditReview({ navigation, route }) {
     <View style={styles.container}>
       <StatusBar style="auto" />
       {loading ? <LoadingIndicator /> : null}
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
           <MaterialCommunityIcons name="keyboard-backspace" size={28} color="black" />
         </TouchableOpacity>
 
         <Text style={styles.headerTitle}>Edit Your Review</Text>
-      </View>
+      </View> */}
       <ScrollView>
         <View style={styles.body}>
           <View style={styles.userRating}>
