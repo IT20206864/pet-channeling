@@ -4,17 +4,15 @@ import {
   Text,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
   TouchableNativeFeedback,
   RefreshControl,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating } from 'react-native-rating-element';
 import { getDocs, collection } from 'firebase/firestore';
-import { db } from '../config';
-import YourReviewCard from '../components/YourReviewCard';
-import ReviewCard from '../components/ReviewCard';
+import { db } from '../../config';
+import YourReviewCard from '../../components/YourReviewCard';
+import ReviewCard from '../../components/ReviewCard';
 
 function Reviews({ navigation }) {
   const [showHeaderTitle, setshowHeaderTitle] = useState(false);

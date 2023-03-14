@@ -4,20 +4,15 @@ import {
   Text,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  Pressable,
-  Image,
   TouchableNativeFeedback,
   TextInput,
   ToastAndroid,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating } from 'react-native-rating-element';
-import { AntDesign } from '@expo/vector-icons';
-import { updateDoc, collection, doc } from 'firebase/firestore';
-import { db } from '../config';
-import ReviewImagePicker from '../components/ReviewImagePicker';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../config';
+import ReviewImagePicker from '../../components/ReviewImagePicker';
 import {
   getStorage,
   ref,
@@ -25,7 +20,7 @@ import {
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 function EditReview({ navigation, route }) {
   const [startRating, setstartRating] = useState(0);

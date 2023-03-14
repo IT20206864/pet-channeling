@@ -4,23 +4,17 @@ import {
   Text,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  Pressable,
-  Image,
   TouchableNativeFeedback,
   TextInput,
   ToastAndroid,
-  ActivityIndicator,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating } from 'react-native-rating-element';
-import { AntDesign } from '@expo/vector-icons';
-import { addDoc, collection, doc } from 'firebase/firestore';
-import { db } from '../config';
-import ReviewImagePicker from '../components/ReviewImagePicker';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../config';
+import ReviewImagePicker from '../../components/ReviewImagePicker';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 function WriteReview({ navigation }) {
   const [startRating, setstartRating] = useState(0);
