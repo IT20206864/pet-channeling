@@ -3,9 +3,9 @@ import AddStaff from '../components/AddStaff';
 import EditStaff from '../components/EditStaff';
 import StaffManagement from '../components/StaffManagement';
 import ViewStaff from '../components/ViewStaff';
-import Reviews from './Reviews';
-import WriteReview from './WriteReview';
-import EditReview from './EditReview';
+import Reviews from './Reviews/Reviews';
+import WriteReview from './Reviews/WriteReview';
+import EditReview from './Reviews/EditReview';
 import Home from './Home';
 
 export default function MainNavigator() {
