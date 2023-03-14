@@ -5,6 +5,7 @@ import { Rating } from 'react-native-rating-element';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../config';
 import ImageView from 'react-native-image-viewing';
+import { reviewStyles } from '../styles';
 
 function ReviewCard({ review, email, fetchData }) {
   const [showImageViewer, setshowImageViewer] = useState(false);
@@ -52,11 +53,11 @@ function ReviewCard({ review, email, fetchData }) {
       .catch((err) => console.log(err));
   };
   return (
-    <View style={styles.reviewCard} key={review.id}>
-      <View style={styles.reviewHeader}>
-        <View style={styles.reviewHeader1}>
-          <Text style={styles.reviewerName}>{review.name}</Text>
-          <View style={styles.reviewRatingContainer}>
+    <View style={reviewStyles.reviewCard} key={review.id}>
+      <View style={reviewStyles.reviewHeader}>
+        <View style={reviewStyles.reviewHeader1}>
+          <Text style={reviewStyles.reviewerName}>{review.name}</Text>
+          <View style={reviewStyles.reviewRatingContainer}>
             <Rating
               rated={review.startRating}
               totalCount={5}
@@ -67,27 +68,27 @@ function ReviewCard({ review, email, fetchData }) {
               icon="ios-star"
               direction="row" // anyOf["row" (default), "row-reverse", "column", "column-reverse"]
             />
-            <Text style={styles.reviewStars}>{review.startRating.toFixed(1)} star(s)</Text>
+            <Text style={reviewStyles.reviewStars}>{review.startRating.toFixed(1)} star(s)</Text>
           </View>
         </View>
-        <Text style={styles.reviewDate}>{review.date}</Text>
+        <Text style={reviewStyles.reviewDate}>{review.date}</Text>
       </View>
       {review.comment !== '' ? (
-        <View style={styles.reviewTextContainer}>
-          <Text style={styles.reviewText}>{review.comment}</Text>
+        <View style={reviewStyles.reviewTextContainer}>
+          <Text style={reviewStyles.reviewText}>{review.comment}</Text>
         </View>
       ) : null}
       <View>
         {review.image !== '' ? (
           <Image
-            style={styles.reviewImage}
+            style={reviewStyles.reviewImage}
             source={{
               uri: review.image,
             }}
           />
         ) : null}
-        <TouchableOpacity style={styles.viewImgBtn} onPress={() => setshowImageViewer(true)}>
-          <Text style={styles.viewImgBtnTxt}>Click to View</Text>
+        <TouchableOpacity style={reviewStyles.viewImgBtn} onPress={() => setshowImageViewer(true)}>
+          <Text style={reviewStyles.viewImgBtnTxt}>Click to View</Text>
         </TouchableOpacity>
         <ImageView
           images={[{ uri: review.image }]}
@@ -96,12 +97,12 @@ function ReviewCard({ review, email, fetchData }) {
           onRequestClose={() => setshowImageViewer(false)}
         />
       </View>
-      <View style={styles.likeContainer}>
+      <View style={reviewStyles.likeContainer}>
         <TouchableOpacity onPress={() => like(review)}>
-          <View style={styles.feedbackBtn}>
+          <View style={reviewStyles.feedbackBtn}>
             <Text
               style={[
-                styles.count,
+                reviewStyles.count,
                 {
                   color: review.likes.includes(email) ? '#f7ad19' : '#000',
                   fontWeight: review.likes.includes(email) ? 'bold' : 'normal',
@@ -118,10 +119,10 @@ function ReviewCard({ review, email, fetchData }) {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => dislike(review)}>
-          <View style={styles.feedbackBtn}>
+          <View style={reviewStyles.feedbackBtn}>
             <Text
               style={[
-                styles.count,
+                reviewStyles.count,
                 {
                   color: review.dislikes.includes(email) ? '#f7ad19' : '#000',
                   fontWeight: review.dislikes.includes(email) ? 'bold' : 'normal',
@@ -141,88 +142,5 @@ function ReviewCard({ review, email, fetchData }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  reviewCard: {
-    width: '100%',
-    flexDirection: 'column',
-    padding: 10,
-    backgroundColor: '#fff',
-    marginBottom: 5,
-  },
-  reviewHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  reviewHeader1: {
-    marginBottom: 10,
-  },
-  reviewerName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  reviewDate: {
-    fontSize: 12,
-  },
-  reviewStars: {
-    fontSize: 12,
-    marginLeft: 5,
-  },
-  reviewTextContainer: {
-    marginBottom: 15,
-  },
-  reviewText: {
-    fontSize: 16,
-  },
-  likeContainer: {
-    marginTop: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  likeBtn: {},
-  feedbackBtn: {
-    paddingLeft: 5,
-    paddingRight: 5,
-    paddingTop: 2,
-    paddingBottom: 2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    /*  borderWidth: 1,
-        borderColor: '#000', */
-    marginLeft: 5,
-    borderRadius: 20,
-  },
-  count: {
-    marginRight: 5,
-  },
-  reviewRatingContainer: {
-    marginTop: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  reviewImage: {
-    width: '100%',
-    height: 150,
-  },
-  viewImgBtn: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000',
-    opacity: 0.5,
-  },
-  viewImgBtnTxt: {
-    color: '#fff',
-    opacity: 1,
-    zIndex: 2,
-  },
-});
 
 export default ReviewCard;
