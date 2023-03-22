@@ -25,7 +25,11 @@ const StaffManagement = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.logoContainer, { transform: [{ translateY }], opacity }]}>
-        <Image resizeMode="stretch" source={require('../assets/staff.png')} style={styles.logo} />
+        <Image
+          resizeMode="stretch"
+          source={require('../../assets/staff.png')}
+          style={styles.logo}
+        />
         <Text style={styles.logoText}>Welocme to Staff Management</Text>
       </Animated.View>
       <View style={styles.buttonContainer}></View>

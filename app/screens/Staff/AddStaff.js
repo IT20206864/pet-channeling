@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import db from '../config';
+import { db } from '../../config';
 import {
   Button,
   View,
@@ -125,7 +125,7 @@ const AddStaff = ({ navigation }) => {
             style={{
               height: 55,
               width: '100%',
-              backgroundColor: '#0077C2',
+              backgroundColor: '#f7ad19',
               marginVertical: 20,
               justifyContent: 'center',
               alignItems: 'center',
@@ -140,7 +140,7 @@ const AddStaff = ({ navigation }) => {
             style={{
               height: 55,
               width: '100%',
-              backgroundColor: '#0077C2',
+              backgroundColor: '#053f5c',
               justifyContent: 'center',
               alignItems: 'center',
             }}
