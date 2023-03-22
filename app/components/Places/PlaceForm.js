@@ -7,7 +7,7 @@ import Button from '../UI/Button';
 import ImagePicker from './ImagePicker';
 import LocationPicker from './LocationPicker';
 
-function PlaceForm({onCreatePlace}) {
+function PlaceForm({ onCreatePlace }) {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
@@ -33,11 +33,7 @@ function PlaceForm({onCreatePlace}) {
     <ScrollView style={styles.form}>
       <View>
         <Text style={styles.label}>Title</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={changeTitleHandler}
-          value={enteredTitle}
-        />
+        <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
       </View>
       <ImagePicker onTakeImage={takeImageHandler} />
       <LocationPicker onPickLocation={pickLocationHandler} />
