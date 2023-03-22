@@ -9,12 +9,7 @@ function OutlinedButton({ onPress, icon, children }) {
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
-      <Ionicons
-        style={styles.icon}
-        name={icon}
-        size={18}
-        color={Colors.primary500}
-      />
+      <Ionicons style={styles.icon} name={icon} size={18} color={Colors.primary500} />
       <Text style={styles.text}>{children}</Text>
     </Pressable>
   );
