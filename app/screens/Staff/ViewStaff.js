@@ -22,7 +22,7 @@ import {
   updateDoc,
   deleteDoc,
 } from 'firebase/firestore';
-import db from '../config';
+import { db } from '../../config';
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
