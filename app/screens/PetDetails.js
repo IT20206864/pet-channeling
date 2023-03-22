@@ -5,7 +5,7 @@ import OutlinedButton from '../components/UI/OutlinedButton';
 import { Colors } from '../constants/colors';
 import { fetchPlaceDetails } from '../util/database';
 
-function PlaceDetails({ route, navigation }) {
+function PetDetails({ route, navigation }) {
   const [fetchedPlace, setFetchedPlace] = useState();
 
   function showOnMapHandler() {
@@ -19,10 +19,10 @@ function PlaceDetails({ route, navigation }) {
 
   useEffect(() => {
     async function loadPlaceData() {
-      const place = await fetchPlaceDetails(selectedPlaceId);
-      setFetchedPlace(place);
+      const pet = await fetchPlaceDetails(selectedPlaceId);
+      setFetchedPlace(pet);
       navigation.setOptions({
-        title: place.title,
+        title: pet.title,
       });
     }
 
@@ -32,7 +32,7 @@ function PlaceDetails({ route, navigation }) {
   if (!fetchedPlace) {
     return (
       <View style={styles.fallback}>
-        <Text>Loading place data...</Text>
+        <Text>Loading pet data...</Text>
       </View>
     );
   }
@@ -52,7 +52,7 @@ function PlaceDetails({ route, navigation }) {
   );
 }
 
-export default PlaceDetails;
+export default PetDetails;
 
 const styles = StyleSheet.create({
   fallback: {

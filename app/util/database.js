@@ -1,14 +1,14 @@
 import * as SQLite from 'expo-sqlite';
 
-import { Place } from '../models/place';
+import { Pet } from '../models/pet';
 
-const database = SQLite.openDatabase('places.db');
+const database = SQLite.openDatabase('pets.db');
 
 export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS places (
+        `CREATE TABLE IF NOT EXISTS pets (
           id INTEGER PRIMARY KEY NOT NULL,
           title TEXT NOT NULL,
           imageUri TEXT NOT NULL,
@@ -30,12 +30,12 @@ export function init() {
   return promise;
 }
 
-export function insertPlace(place) {
+export function insertPlace(pet) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        `INSERT INTO places (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
-        [place.title, place.imageUri, place.address, place.location.lat, place.location.lng],
+        `INSERT INTO pets (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+        [pet.title, pet.imageUri, pet.address, pet.location.lat, pet.location.lng],
         (_, result) => {
           resolve(result);
         },
@@ -53,14 +53,14 @@ export function fetchPlaces() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM places',
+        'SELECT * FROM pets',
         [],
         (_, result) => {
-          const places = [];
+          const pets = [];
 
           for (const dp of result.rows._array) {
-            places.push(
-              new Place(
+            pets.push(
+              new Pet(
                 dp.title,
                 dp.imageUri,
                 {
@@ -72,7 +72,7 @@ export function fetchPlaces() {
               )
             );
           }
-          resolve(places);
+          resolve(pets);
         },
         (_, error) => {
           reject(error);
@@ -88,17 +88,17 @@ export function fetchPlaceDetails(id) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM places WHERE id = ?',
+        'SELECT * FROM pets WHERE id = ?',
         [id],
         (_, result) => {
           const dbPlace = result.rows._array[0];
-          const place = new Place(
+          const pet = new Pet(
             dbPlace.title,
             dbPlace.imageUri,
             { lat: dbPlace.lat, lng: dbPlace.lng, address: dbPlace.address },
             dbPlace.id
           );
-          resolve(place);
+          resolve(pet);
         },
         (_, error) => {
           reject(error);

@@ -2,21 +2,21 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../../constants/colors';
-import PlaceItem from './PlaceItem';
+import PetItem from './PetItem';
 
-function PlacesList({ places }) {
+function PetsList({ pets }) {
   const navigation = useNavigation();
 
   function selectPlaceHandler(id) {
-    navigation.navigate('PlaceDetails', {
+    navigation.navigate('PetDetails', {
       placeId: id,
     });
   }
 
-  if (!places || places.length === 0) {
+  if (!pets || pets.length === 0) {
     return (
       <View style={styles.fallbackContainer}>
-        <Text style={styles.fallbackText}>No places added yet - start adding some!</Text>
+        <Text style={styles.fallbackText}>No pets added yet - start adding some!</Text>
       </View>
     );
   }
@@ -24,14 +24,14 @@ function PlacesList({ places }) {
   return (
     <FlatList
       style={styles.list}
-      data={places}
+      data={pets}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <PlaceItem place={item} onSelect={selectPlaceHandler} />}
+      renderItem={({ item }) => <PetItem pet={item} onSelect={selectPlaceHandler} />}
     />
   );
 }
 
-export default PlacesList;
+export default PetsList;
 
 const styles = StyleSheet.create({
   list: {

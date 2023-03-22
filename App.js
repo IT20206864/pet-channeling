@@ -4,13 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 
-import AllPlaces from './app/screens/AllPlaces';
-import AddPlace from './app/screens/AddPlace';
+import AllPets from './app/screens/AllPets';
+import AddPet from './app/screens/AddPet';
 import IconButton from './app/components/UI/IconButton';
 import { Colors } from './app/constants/colors';
 import Map from './app/screens/Map';
 import { init } from './app/util/database';
-import PlaceDetails from './app/screens/PlaceDetails';
+import PetDetails from './app/screens/PetDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,33 +42,33 @@ export default function App() {
           }}
         >
           <Stack.Screen
-            name="AllPlaces"
-            component={AllPlaces}
+            name="AllPets"
+            component={AllPets}
             options={({ navigation }) => ({
-              title: 'Your Favorite Places',
+              title: 'Your Favorite Pets',
               headerRight: ({ tintColor }) => (
                 <IconButton
                   icon="add"
                   size={24}
                   color={tintColor}
-                  onPress={() => navigation.navigate('AddPlace')}
+                  onPress={() => navigation.navigate('AddPet')}
                 />
               ),
             })}
           />
           <Stack.Screen
-            name="AddPlace"
-            component={AddPlace}
+            name="AddPet"
+            component={AddPet}
             options={{
-              title: 'Add a new Place',
+              title: 'Add a new Pet',
             }}
           />
           <Stack.Screen name="Map" component={Map} />
           <Stack.Screen
-            name="PlaceDetails"
-            component={PlaceDetails}
+            name="PetDetails"
+            component={PetDetails}
             options={{
-              title: 'Loading Place...',
+              title: 'Loading Pet...',
             }}
           />
         </Stack.Navigator>

@@ -2,12 +2,12 @@ import { useCallback, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Colors } from '../../constants/colors';
-import { Place } from '../../models/place';
+import { Pet } from '../../models/pet';
 import Button from '../UI/Button';
 import ImagePicker from './ImagePicker';
 import LocationPicker from './LocationPicker';
 
-function PlaceForm({ onCreatePlace }) {
+function PetForm({ onCreatePlace }) {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
@@ -25,7 +25,7 @@ function PlaceForm({ onCreatePlace }) {
   }, []);
 
   function savePlaceHandler() {
-    const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+    const placeData = new Pet(enteredTitle, selectedImage, pickedLocation);
     onCreatePlace(placeData);
   }
 
@@ -37,12 +37,12 @@ function PlaceForm({ onCreatePlace }) {
       </View>
       <ImagePicker onTakeImage={takeImageHandler} />
       <LocationPicker onPickLocation={pickLocationHandler} />
-      <Button onPress={savePlaceHandler}>Add Place</Button>
+      <Button onPress={savePlaceHandler}>Add Pet</Button>
     </ScrollView>
   );
 }
 
-export default PlaceForm;
+export default PetForm;
 
 const styles = StyleSheet.create({
   form: {

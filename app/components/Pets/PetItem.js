@@ -2,22 +2,22 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../../constants/colors';
 
-function PlaceItem({ place, onSelect }) {
+function PetItem({ pet, onSelect }) {
   return (
     <Pressable
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
-      onPress={onSelect.bind(this, place.id)}
+      onPress={onSelect.bind(this, pet.id)}
     >
-      <Image style={styles.image} source={{ uri: place.imageUri }} />
+      <Image style={styles.image} source={{ uri: pet.imageUri }} />
       <View style={styles.info}>
-        <Text style={styles.title}>{place.title}</Text>
-        <Text style={styles.address}>{place.address}</Text>
+        <Text style={styles.title}>{pet.title}</Text>
+        <Text style={styles.address}>{pet.address}</Text>
       </View>
     </Pressable>
   );
 }
 
-export default PlaceItem;
+export default PetItem;
 
 const styles = StyleSheet.create({
   item: {
