@@ -28,6 +28,7 @@ The following screens are the screenshots of the live mobile app running.
 <div style="display:flex; flex-wrap:wrap;">
   <img src="./app/assets/img.png" alt="screen1" width="250" style="flex:1; margin: 5px;">
   <img src="./app/assets/img.png" alt="screen2" width="250" style="flex:1; margin: 5px;">
+  <img src="./app/assets/img.png" alt="screen3" width="250" style="flex:1; margin: 5px;">
  </div>
 
 ## Technology Stack
