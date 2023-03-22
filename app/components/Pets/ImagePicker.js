@@ -1,3 +1,9 @@
+/**
+ * @component ImagePicker
+ * This component is used to pick an image from the camera.
+ * @param {Function} onTakeImage - Function to call after an image is taken.
+ */
+
 import { Alert, Image, StyleSheet, Text, View } from 'react-native';
 import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 import { useState } from 'react';
@@ -7,8 +13,13 @@ import OutlinedButton from '../UI/OutlinedButton';
 
 function ImagePicker({ onTakeImage }) {
   const [pickedImage, setPickedImage] = useState();
-
   const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
+
+  /**
+   * @function verifyPermissions
+   * This function verifies whether the user has granted the camera permission or not
+   * @returns {Boolean} True if the permission is granted, otherwise False
+   */
 
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -27,6 +38,13 @@ function ImagePicker({ onTakeImage }) {
 
     return true;
   }
+
+  /**
+   * @function takeImageHandler
+   * This function is called when the user presses the "Take Image" button.
+   * It verifies the camera permission and launches the camera to take an image.
+   * @returns {void}
+   */
 
   async function takeImageHandler() {
     const hasPermission = await verifyPermissions();
