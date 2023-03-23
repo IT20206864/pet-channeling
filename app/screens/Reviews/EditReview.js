@@ -36,6 +36,7 @@ function EditReview({ navigation, route }) {
       setloading(true);
       uploadImage((uploadedImageUri, delImg) => {
         updateDoc(doc(db, 'reviews', route.params.review.id), {
+          channelingCentre: route.params.review.channelingCentre,
           name: route.params.review.name,
           email: route.params.review.email,
           startRating,

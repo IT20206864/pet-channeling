@@ -1,25 +1,43 @@
-# Pet Channelling
+# Pet Channelling Mobile App 🐶
 
-This is a pet channelling mobile application
+<div style="display:flex; flex-wrap:wrap;">
+  <img src="./app/assets/logo.png" alt="logo" style="flex:1; margin: 5px;">
+ </div>
+
+This is a pet channelling mobile application where the user would be able to book an appointment, from the admin side staff would be managed such as the doctors, users would be able to give a review of their experience and finally users would be able to add a pet for anyone to adopt that particular pet.
 
 ## Architecture Diagram
 
+Below illustrates the architecture diagram of the system in a high-level view. The diagram was custom-drawn using Figma.
+
+<div style="display:flex; flex-wrap:wrap;">
+  <img src="./app/assets/architecture.png" alt="logo" style="flex:1; margin: 5px;">
+ </div>
+
 ## Features
 
-- Login
-- Signup
+- Create,Update, Delete, Retrieve, List, Search
+- Camera Access and Preveiw
+- Location Access and Preview
+- Image Upload & Retriev
 
 ## Screenshots
 
+The following screens are the screenshots of the live mobile app running.
+
 <div style="display:flex; flex-wrap:wrap;">
-  <img src="./images/sigin.png" alt="signin" width="250" style="flex:1; margin: 5px;">
-  <img src="./images/login.png" alt="login" width="250" style="flex:1; margin: 5px;">
+  <img src="./app/assets/img.png" alt="screen1" width="250" style="flex:1; margin: 5px;">
+  <img src="./app/assets/img.png" alt="screen2" width="250" style="flex:1; margin: 5px;">
+  <img src="./app/assets/img.png" alt="screen3" width="250" style="flex:1; margin: 5px;">
  </div>
 
 ## Technology Stack
 
-- React Native
-- Firebase
+The following are the technologies used within this pet channeling mobile application. In order to run this mobile app the following technologies are the prerequisites.
+
+<div style="display:flex; flex-wrap:wrap;">
+  <img src="./app/assets/stack.png" alt="logo" style="flex:1; margin: 5px;">
+ </div>
 
 ## Get Started
 
@@ -35,37 +53,23 @@ $ cd pet-channeling/
 $ npm install
 ```
 
-#### 2. Simulate for iOS
+#### 2. Run on for iOS, Android or Web
 
 ```sh
-$ cd ios && pod install
+$ npm run ios
+
+$ npm run android
+
+$ npm run web
 ```
 
-**Method One**
+## Authors
 
-- Open the project in Xcode from **ios/pet-channeling.xcodeproj**.
+In the below table shoows the memebers who contributed to the project dedicating their time and effort.
 
-- Hit the play button.
-
-**Method Two**
-
-- Run the following command in your terminal.
-
-```sh
-$ react-native run-ios
-```
-
-#### 3. Simulate for Android
-
-- Make sure you have an **Android emulator** installed and running.
-
-- Run the following command in your terminal.
-
-```sh
-$ react-native run-android
-```
-
-## Debugger
-
-- [React Native Debugger](https://github.com/jhen0409/react-native-debugger) : The standalone app based on official debugger of React Native, and includes React Inspector / Redux DevTools
-- [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) `2.13.5`
+| Name                  | Email                  | IT Number    |
+| --------------------- | ---------------------- | ------------ |
+| `S.K. Shehan`         | it20206864@my.sliit.lk | `it20206864` |
+| `Dissanayake M.C.Y.D` | it20013332@my.sliit.lk | `it20013332` |
+| `Jayasinghe H.A.S`    | it20222222@my.sliit.lk | `it20222222` |
+| `Dilshan B.K.R.`      | it19967080@my.sliit.lk | `it19967080` |
