@@ -21,6 +21,8 @@ function Reviews({ navigation }) {
   const [myReviews, setmyReviews] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
   const [email, setemail] = useState('cristiano@gmail.com');
+  const [channelingCentre, setchannelingCentre] = useState('ABCD1234');
+  const [name, setname] = useState('Cristiano Ronaldo');
   const [avgRating, setavgRating] = useState('0.0');
 
   //called when user scrolls the view
@@ -38,14 +40,16 @@ function Reviews({ navigation }) {
       setrefreshing(true);
     }
 
-    const docSnap = await getDocs(collection(db, 'reviews'));
+    const docSnap = await getDocs(collection(db, `reviews`));
     let rvs = [];
     let userRvs = [];
     docSnap.forEach((doc) => {
-      if (doc.data().email === email) {
-        userRvs.push({ id: doc.id, ...doc.data() });
-      } else {
-        rvs.push({ id: doc.id, ...doc.data() });
+      if (doc.data().channelingCentre === channelingCentre) {
+        if (doc.data().email === email) {
+          userRvs.push({ id: doc.id, ...doc.data() });
+        } else {
+          rvs.push({ id: doc.id, ...doc.data() });
+        }
       }
     });
 
@@ -57,13 +61,17 @@ function Reviews({ navigation }) {
 
   //used to calculate average start rating
   const calcAvgRating = (arr) => {
-    let total = 0;
-    arr.map((d) => {
-      total += d.startRating;
-    });
+    if (arr.length > 0) {
+      let total = 0;
+      arr.map((d) => {
+        total += d.startRating;
+      });
 
-    const avg = (total / arr.length).toFixed(1);
-    setavgRating(avg);
+      const avg = (total / arr.length).toFixed(1);
+      setavgRating(avg);
+    } else {
+      setavgRating(0);
+    }
   };
 
   useEffect(() => {
@@ -109,7 +117,7 @@ function Reviews({ navigation }) {
           </View>
           <TouchableNativeFeedback
             style={{ width: '100%' }}
-            onPress={() => navigation.navigate('Write Review')}
+            onPress={() => navigation.navigate('Write Review', { channelingCentre, email, name })}
           >
             <View style={reviewStyles.writeReviewBtn}>
               <Text style={reviewStyles.writeReviewBtnTxt}>Write a Review</Text>

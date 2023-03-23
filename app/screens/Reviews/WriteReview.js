@@ -16,7 +16,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/
 import LoadingIndicator from '../../components/LoadingIndicator';
 import { commonStyles, reviewStyles } from '../../styles';
 
-function WriteReview({ navigation }) {
+function WriteReview({ navigation, route }) {
   const [startRating, setstartRating] = useState(0);
   const [comment, setcomment] = useState('');
   const [image, setimage] = useState(null);
@@ -30,12 +30,13 @@ function WriteReview({ navigation }) {
       uploadImage((uploadedImageUri) => {
         console.log('uri', uploadedImageUri);
         addDoc(collection(db, 'reviews'), {
-          name: 'Cristiano Ronaldo',
-          email: 'cristiano@gmail.com',
+          channelingCentre: route.params.channelingCentre,
+          name: route.params.name,
+          email: route.params.email,
           startRating,
           comment,
           image: uploadedImageUri,
-          date: new Date().toISOString().split('T')[0],
+          date: new Date().toISOString(),
           likes: [],
           dislikes: [],
         })
