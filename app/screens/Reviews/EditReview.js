@@ -3,21 +3,15 @@ import {
   View,
   Text,
   StatusBar,
-  StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  Pressable,
-  Image,
   TouchableNativeFeedback,
   TextInput,
   ToastAndroid,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Rating } from 'react-native-rating-element';
-import { AntDesign } from '@expo/vector-icons';
-import { updateDoc, collection, doc } from 'firebase/firestore';
-import { db } from '../config';
-import ReviewImagePicker from '../components/ReviewImagePicker';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../config';
+import ReviewImagePicker from '../../components/ReviewImagePicker';
 import {
   getStorage,
   ref,
@@ -25,7 +19,8 @@ import {
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingIndicator from '../../components/LoadingIndicator';
+import { commonStyles, reviewStyles } from '../../styles';
 
 function EditReview({ navigation, route }) {
   const [startRating, setstartRating] = useState(0);
@@ -41,6 +36,7 @@ function EditReview({ navigation, route }) {
       setloading(true);
       uploadImage((uploadedImageUri, delImg) => {
         updateDoc(doc(db, 'reviews', route.params.review.id), {
+          channelingCentre: route.params.review.channelingCentre,
           name: route.params.review.name,
           email: route.params.review.email,
           startRating,
@@ -126,21 +122,21 @@ function EditReview({ navigation, route }) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={commonStyles.container}>
       <StatusBar style="auto" />
       {loading ? <LoadingIndicator /> : null}
-      {/* <View style={styles.header}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
+      {/* <View style={reviewStyles.header}>
+        <TouchableOpacity style={reviewStyles.backBtn} onPress={() => navigation.goBack()}>
           <MaterialCommunityIcons name="keyboard-backspace" size={28} color="black" />
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Edit Your Review</Text>
+        <Text style={reviewStyles.headerTitle}>Edit Your Review</Text>
       </View> */}
       <ScrollView>
-        <View style={styles.body}>
-          <View style={styles.userRating}>
-            <Text style={styles.labelTxt}>Select Your Rating</Text>
-            <Text style={styles.ratingTxt}>{startRating.toFixed(1)}</Text>
+        <View style={reviewStyles.body}>
+          <View style={reviewStyles.userRating}>
+            <Text style={reviewStyles.labelTxt}>Select Your Rating</Text>
+            <Text style={reviewStyles.ratingTxt}>{startRating.toFixed(1)}</Text>
             <Rating
               rated={startRating}
               totalCount={5}
@@ -154,9 +150,11 @@ function EditReview({ navigation, route }) {
           </View>
           {image ? <ReviewImagePicker onImageChange={onImageChange} img={image} /> : null}
           <View style={{ marginTop: 30 }}>
-            <Text style={[styles.labelTxt, { marginBottom: 10 }]}>Describe Your Experience</Text>
+            <Text style={[reviewStyles.labelTxt, { marginBottom: 10 }]}>
+              Describe Your Experience
+            </Text>
             <TextInput
-              style={styles.textInput}
+              style={reviewStyles.textInput}
               placeholder="Type here..."
               multiline={true}
               value={comment}
@@ -166,99 +164,12 @@ function EditReview({ navigation, route }) {
         </View>
       </ScrollView>
       <TouchableNativeFeedback style={{ width: '100%' }} onPress={updateReview}>
-        <View style={styles.writeReviewBtn}>
-          <Text style={styles.writeReviewBtnTxt}>Submit Review</Text>
+        <View style={reviewStyles.submitReviewBtn}>
+          <Text style={reviewStyles.submitReviewBtnTxt}>Submit Review</Text>
         </View>
       </TouchableNativeFeedback>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  body: {
-    flexGrow: 1,
-    flexDirection: 'column',
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginBottom: 80,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  headerTitle: {
-    fontSize: 20,
-  },
-  backBtn: {
-    position: 'absolute',
-    left: 10,
-  },
-  userRating: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  ratingTxt: {
-    fontSize: 40,
-    fontWeight: 'bold',
-  },
-  ratingSecondaryText: {
-    fontSize: 12,
-    marginBottom: 10,
-  },
-  labelTxt: {
-    marginTop: 10,
-    fontSize: 14,
-    fontWeight: 400,
-  },
-  imageUploadWrapper: {
-    marginTop: 40,
-    height: 150,
-    borderWidth: 2,
-    borderColor: '#053f5c',
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageUploadText: {
-    fontSize: 14,
-    color: '#053f5c',
-    fontWeight: 'bold',
-  },
-  cameraIcon: {
-    color: '#053f5c',
-  },
-  textInput: {
-    borderWidth: 2,
-    borderColor: '#053f5c',
-    borderRadius: 16,
-    height: 150,
-    textAlignVertical: 'top',
-    padding: 10,
-    fontSize: 14,
-  },
-  writeReviewBtn: {
-    position: 'absolute',
-    bottom: 15,
-    left: 15,
-    right: 15,
-    marginTop: 15,
-    backgroundColor: '#f7ad19',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 16,
-  },
-  writeReviewBtnTxt: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '500',
-  },
-});
 
 export default EditReview;

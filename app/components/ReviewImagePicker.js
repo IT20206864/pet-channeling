@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { AntDesign } from '@expo/vector-icons';
+import ImageView from 'react-native-image-viewing';
 
 function ReviewImagePicker({ img, onImageChange }) {
   const [image, setimage] = useState(null);
+  const [showImageViewer, setshowImageViewer] = useState(false);
 
   //called when user wants to select an image
   pickImageHandler = () => {
@@ -95,14 +97,25 @@ function ReviewImagePicker({ img, onImageChange }) {
 
   return (
     <View style={styles.container}>
-      {image && <Image source={{ uri: image }} style={styles.image} />}
+      {image && (
+        <Pressable onPress={() => setshowImageViewer(true)}>
+          <Image source={{ uri: image }} style={styles.image} />
+        </Pressable>
+      )}
+      {image && (
+        <ImageView
+          images={[{ uri: image }]}
+          imageIndex={0}
+          visible={showImageViewer}
+          onRequestClose={() => setshowImageViewer(false)}
+        />
+      )}
       {image && (
         <Pressable style={styles.deleteImageWrapper} onPress={deleteImage}>
           <AntDesign name="delete" size={24} color="red" style={styles.deleteIcon} />
           <Text style={styles.deleteImageText}>Delete Photo</Text>
         </Pressable>
       )}
-
       <Pressable style={styles.imageUploadWrapper} onPress={pickImageHandler}>
         <AntDesign name="camerao" size={24} color="black" style={styles.cameraIcon} />
         <Text style={styles.imageUploadText}>Upload a Photo</Text>

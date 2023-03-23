@@ -1,20 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AddStaff from '../components/AddStaff';
-import EditStaff from '../components/EditStaff';
-import StaffManagement from '../components/StaffManagement';
-import ViewStaff from '../components/ViewStaff';
-import Reviews from './Reviews';
-import WriteReview from './WriteReview';
-import EditReview from './EditReview';
+
+import Reviews from './Reviews/Reviews';
+import WriteReview from './Reviews/WriteReview';
+import EditReview from './Reviews/EditReview';
 import Home from './Home';
+import AddStaff from './Staff/AddStaff';
+import ViewStaff from './Staff/ViewStaff';
+import EditStaff from './Staff/EditStaff';
+import StaffManagement from './Staff/StaffManagement';
 
 export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
   const headerOptions = {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor: '#053f5c',
     },
-    headerTintColor: '#000',
+    headerTintColor: '#29b6f6',
     headerTitleStyle: {
       fontWeight: 'bold',
     },
