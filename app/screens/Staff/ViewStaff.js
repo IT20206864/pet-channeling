@@ -1,28 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  Pressable,
-  Alert,
-  LogBox,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, LogBox } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import {
-  collection,
-  doc,
-  onSnapshot,
-  QuerySnapshot,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-} from 'firebase/firestore';
-import db from '../config';
+import { collection, doc, onSnapshot, deleteDoc } from 'firebase/firestore';
+import { db } from '../../config';
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -50,6 +31,7 @@ export default function ViewStaff({ navigation }) {
     });
   }, []);
 
+  //confirmation dialog box
   const showConfirmDialog = (data) => {
     console.log(data);
     return Alert.alert(
@@ -59,7 +41,7 @@ export default function ViewStaff({ navigation }) {
         {
           text: 'Yes',
           onPress: () => {
-            DeleteUser(data);
+            DeleteStaff(data);
           },
         },
         {
@@ -69,7 +51,8 @@ export default function ViewStaff({ navigation }) {
     );
   };
 
-  async function DeleteUser(data) {
+  //delete staff function
+  async function DeleteStaff(data) {
     const ref = doc(db, 'staff', data);
     await deleteDoc(ref)
       .then(() => {
@@ -90,7 +73,7 @@ export default function ViewStaff({ navigation }) {
                 <Text key={data._id} style={styles.todoTitle}>
                   {data.fullname}
                 </Text>
-                <Text key={data._id} style={styles.subTitle}>
+                <Text key={data._id} style={styles.todoSubTitle}>
                   {'Title :' + data.stafftype}
                 </Text>
                 <Text key={data._id} style={styles.subTitle}>
@@ -149,16 +132,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  todoSubTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
   subTitle: {
+    fontWeight: 'bold',
     marginTop: '1%',
-    opacity: 0.6,
+
     fontSize: 15,
   },
   iconsContainer: {
     justifyContent: 'space-evenly',
     alignItems: 'center',
     flexDirection: 'row',
-
     marginHorizontal: '2%',
   },
   iconContainer: {
