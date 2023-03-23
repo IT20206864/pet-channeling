@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
       </View>
 
       <View style={styles.cardContainer}>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('Reviews')}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Channel Doctor')}>
           <View style={[styles.card, styles.firstCard]}>
             <Fontisto name="doctor" size={28} color="black" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>Chanelling</Text>
@@ -46,6 +46,14 @@ const Home = ({ navigation }) => {
           <View style={[styles.card, styles.lastCard]}>
             <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>Pet Adopt</Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableNativeFeedback
+          onPress={() => navigation.navigate('View Channelings')}
+        >
+          <View style={[styles.card, styles.lastCard]}>
+            <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>View Channelings</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
