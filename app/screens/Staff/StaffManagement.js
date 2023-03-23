@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   viewButton: {
-    backgroundColor: '#4caf50',
+    backgroundColor: '#f7ad19',
   },
   addButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#053f5c',
   },
   buttonText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
     marginLeft: '5%',
     color: '#fff',

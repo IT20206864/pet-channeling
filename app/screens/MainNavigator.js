@@ -13,9 +13,9 @@ export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
   const headerOptions = {
     headerStyle: {
-      backgroundColor: '#fff',
+      backgroundColor: '#053f5c',
     },
-    headerTintColor: '#000',
+    headerTintColor: '#29b6f6',
     headerTitleStyle: {
       fontWeight: 'bold',
     },
