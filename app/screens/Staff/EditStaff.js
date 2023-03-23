@@ -253,4 +253,4 @@ const getStyles = (theme) =>
     },
   });
 
-export default EditStaff;
+export default EditStaff
