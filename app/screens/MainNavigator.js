@@ -7,6 +7,7 @@ import Reviews from './Reviews/Reviews';
 import WriteReview from './Reviews/WriteReview';
 import EditReview from './Reviews/EditReview';
 import Home from './Home';
+import ChannelDoc from './Channeling/ChannelDoc';
 
 export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ export default function MainNavigator() {
       <Stack.Screen name="Reviews" component={Reviews} options={headerOptions} />
       <Stack.Screen name="Write Review" component={WriteReview} options={headerOptions} />
       <Stack.Screen name="Edit Review" component={EditReview} options={headerOptions} />
+      <Stack.Screen name="Channel Doctor" component={ChannelDoc} options={headerOptions} />
     </Stack.Navigator>
   );
 }

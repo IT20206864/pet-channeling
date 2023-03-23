@@ -260,3 +260,7 @@ export const reviewStyles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export const channelingStyles = StyleSheet.create({
+
+})

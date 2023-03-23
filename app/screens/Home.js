@@ -18,6 +18,21 @@ const Home = ({ navigation }) => {
           onPress={() => navigation.navigate('StaffManagement')}
         ></Button>
       </TouchableHighlight>
+
+      {/* Sample */}
+      <TouchableHighlight style={styles.buttonContainer}>
+        <Button
+          title="Write Review"
+          onPress={() => navigation.navigate('Write Review')}
+        ></Button>
+      </TouchableHighlight>
+
+      <TouchableHighlight style={styles.buttonContainer}>
+        <Button
+          title="Channel Doctor"
+          onPress={() => navigation.navigate('Channel Doctor')}
+        ></Button>
+      </TouchableHighlight>
     </View>
   );
 };
