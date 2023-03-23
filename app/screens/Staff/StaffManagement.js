@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Image, StyleSheet, Animated, TouchableOpacity, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 const StaffManagement = ({ navigation }) => {
   const animation = useRef(new Animated.Value(0)).current;
@@ -25,7 +25,11 @@ const StaffManagement = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.logoContainer, { transform: [{ translateY }], opacity }]}>
-        <Image resizeMode="stretch" source={require('../assets/staff.png')} style={styles.logo} />
+        <Image
+          resizeMode="stretch"
+          source={require('../../assets/staff.png')}
+          style={styles.logo}
+        />
         <Text style={styles.logoText}>Welocme to Staff Management</Text>
       </Animated.View>
       <View style={styles.buttonContainer}></View>

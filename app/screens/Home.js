@@ -4,19 +4,10 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableHighlight style={styles.buttonContainer}>
-        <Button title="Add Staff" onPress={() => navigation.navigate('AddStaff')}></Button>
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.buttonContainer}>
-        <Button title="view Staff" onPress={() => navigation.navigate('ViewStaff')}></Button>
+        <Button title="Staff" onPress={() => navigation.navigate('StaffManagement')}></Button>
       </TouchableHighlight>
       <TouchableHighlight style={styles.buttonContainer}>
         <Button title="Reviews" onPress={() => navigation.navigate('Reviews')}></Button>
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.buttonContainer}>
-        <Button
-          title="Staff Management"
-          onPress={() => navigation.navigate('StaffManagement')}
-        ></Button>
       </TouchableHighlight>
     </View>
   );

@@ -9,8 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-firebase/storage": "^17.3.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "@rneui/themed": "^4.0.0-rc.7",
     "expo": "~48.0.5",
     "expo-image-picker": "~14.1.1",
     "expo-status-bar": "~1.4.4",
@@ -18,11 +20,14 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-native": "0.71.3",
+    "react-native-action-button": "^2.8.5",
     "react-native-dropdown-picker": "^5.4.6",
+    "react-native-image-crop-picker": "^0.39.0",
     "react-native-image-viewing": "^0.2.2",
     "react-native-rating-element": "^5.4.0",
     "react-native-safe-area-context": "4.5.0",
-    "react-native-screens": "^3.20.0"
+    "react-native-screens": "^3.20.0",
+    "react-native-toggle-element": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
