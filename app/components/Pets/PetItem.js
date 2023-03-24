@@ -1,7 +1,17 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+/**
+ * Represents a component for displaying a pet item in a list.
+ * @param {Object} pet - An object representing the pet item to be displayed.
+ * @param {Function} onSelect - A function to be executed when the pet item is selected.
+*/
 
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 
+
+/**
+ * A callback function to be executed when the pet item is selected.
+ * @param {string} petId - The ID of the selected pet item.
+*/
 function PetItem({ pet, onSelect }) {
   return (
     <Pressable
