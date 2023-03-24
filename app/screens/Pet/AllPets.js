@@ -1,3 +1,8 @@
+/**
+ * @description This component displays a list of all pets.
+ * @params {object} route - Contains the parameters passed to this component through the navigation object.
+*/
+
 import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
