@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 
 import { Colors } from '../../constants/colors';
 import { Pet } from '../../models/pet';
@@ -30,15 +30,30 @@ function PetForm({ onCreatePlace }) {
   }
 
   return (
-    <ScrollView style={styles.form}>
-      <View>
-        <Text style={styles.label}>Pet Name</Text>
-        <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
-      </View>
-      <ImagePicker onTakeImage={takeImageHandler} />
-      <LocationPicker onPickLocation={pickLocationHandler} />
-      <Button onPress={savePlaceHandler}>Add Pet</Button>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.form}>
+        <Text style={styles.logoText}>Add New Pet</Text>
+        <Text style={styles.heading2}>In the screen you would be able to add your pets</Text>
+        <Image
+          resizeMode="contain"
+          source={require('../../assets/pet5.png')}
+          style={styles.logo}
+        />
+        <View>
+          <Text style={styles.label}>Pet Name</Text>
+          <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
+        </View>
+        <View style={{ paddingTop: 10 }}>
+          <ImagePicker onTakeImage={takeImageHandler} />
+        </View>
+        <View style={{ paddingTop: 10 }}>
+          <LocationPicker onPickLocation={pickLocationHandler} />
+        </View>
+        <View style={{ paddingTop: 10, marginBottom: 90 }}>
+          <Button onPress={savePlaceHandler}>Add Pet</Button>
+        </View>
+      </ScrollView >
+    </View>
   );
 }
 
@@ -49,10 +64,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
+  container: {
+    paddingTop: 10,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  logo: {
+    marginBottom: 10,
+  },
   label: {
-    fontWeight: 'bold',
+    fontWeight: 'regular',
     marginBottom: 4,
-    color: Colors.primary500,
+    color: '#000000',
   },
   input: {
     marginVertical: 8,
@@ -108,5 +131,15 @@ const styles = StyleSheet.create({
   dropDownPlaceholder: {
     color: '#2AB9FE',
     fontSize: 18,
-  }
+  },
+  logoText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  heading2: {
+    fontSize: 15,
+    color: '#000000',
+    paddingBottom: 40
+  },
 });
