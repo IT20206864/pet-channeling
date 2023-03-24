@@ -32,7 +32,7 @@ const AddBid = ({ navigation }) => {
 
   const styles = getStyles(theme);
 
-  //Add staff member
+  //Add bid member
   async function saveStaff(async) {
     await addDoc(collection(db, 'bid'), {
       fullname: fullname,

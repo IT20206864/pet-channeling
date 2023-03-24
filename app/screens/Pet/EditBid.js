@@ -36,7 +36,7 @@ const EditBid = ({ route, navigation }) => {
   const showConfirmDialog = () => {
     return Alert.alert(
       'Are your sure?',
-      'Are you sure you want to Update this Staff Member? This action cannot be undone!',
+      'Are you sure you want to Update this Bid Member? This action cannot be undone!',
       [
         {
           text: 'Yes',
@@ -156,6 +156,7 @@ const getStyles = (theme) =>
       paddingTop: 20,
       flex: 1,
       flexDirection: 'column',
+      marginBottom: 40
     },
     header: {
       paddingBottom: 10,
@@ -169,6 +170,7 @@ const getStyles = (theme) =>
       fontSize: 18,
       marginBottom: 10,
       color: '#4A4A4A',
+      backgroundColor: '#E5E4E2',
     },
     label: {
       marginVertical: 5,
@@ -180,7 +182,6 @@ const getStyles = (theme) =>
       alignContent: 'center',
     },
     dropDown: {
-      backgroundColor: '#F3F1F1',
       height: 40,
       width: '100%',
       padding: 10,
@@ -189,7 +190,7 @@ const getStyles = (theme) =>
       marginBottom: 10,
       borderWidth: 0,
       color: '#4A4A4A',
-
+      backgroundColor: '#E5E4E2',
       alignSelf: 'center',
       marginVertical: 0,
     },

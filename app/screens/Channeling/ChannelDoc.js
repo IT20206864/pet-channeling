@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { commonStyles, channelingStyles } from '../../styles';
+import { channelingStyles } from '../../styles';
 import * as ImagePicker from 'expo-image-picker';
 import { addDoc, collection, onSnapshot } from '@firebase/firestore';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -47,7 +47,7 @@ function ChannelDoc({ navigation, route }) {
 
     // Fetch Doctors 
     useEffect(() => {
-        const colRef = collection(db, 'staff');
+        const colRef = collection(db, 'bid');
         onSnapshot(colRef, (QuerySnapshot) => {
             const doctors = [];
             QuerySnapshot.forEach((doc) => {

@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from "react-native-toast-notifications";
 import {
-    Button,
     View,
-    Text,
-    StyleSheet,
-    TextInput,
+    Text, TextInput,
     ScrollView,
-    TouchableOpacity,
-    Alert,
-    Image,
+    TouchableOpacity
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { commonStyles, channelingStyles } from '../../styles';
-import * as ImagePicker from 'expo-image-picker';
+import { channelingStyles } from '../../styles';
 import { db } from '../../config';
 import { onSnapshot, collection, updateDoc, doc } from 'firebase/firestore';
 
@@ -43,7 +37,7 @@ export default function EditChanneling({ route, navigation }) {
     };
     // Fetch Doctors 
     useEffect(() => {
-        const colRef = collection(db, 'staff');
+        const colRef = collection(db, 'bid');
         onSnapshot(colRef, (QuerySnapshot) => {
             const doctors = [];
             QuerySnapshot.forEach((doc) => {
