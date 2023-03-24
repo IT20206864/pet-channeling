@@ -1,3 +1,9 @@
+/**
+* A screen component that allows a user to edit a bid record
+* @param {Object} route - The route object containing data about the screen's route
+* @param {Object} navigation - The navigation object containing methods for navigating between screens
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
