@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ScrollView, Image, View, Text, StyleSheet } from 'react-native';
 
-import OutlinedButton from '../components/UI/OutlinedButton';
-import { Colors } from '../constants/colors';
-import { fetchPlaceDetails } from '../util/database';
+import OutlinedButton from '../../components/UI/OutlinedButton';
+import { Colors } from '../../constants/colors';
+import { fetchPlaceDetails } from '../../util/database';
 
 function PetDetails({ route, navigation }) {
   const [fetchedPlace, setFetchedPlace] = useState();

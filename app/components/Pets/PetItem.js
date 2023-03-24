@@ -11,6 +11,8 @@ function PetItem({ pet, onSelect }) {
       <Image style={styles.image} source={{ uri: pet.imageUri }} />
       <View style={styles.info}>
         <Text style={styles.title}>{pet.title}</Text>
+        <Text style={styles.phone}>{pet.phone}</Text>
+        <Text style={styles.email}>{pet.email}</Text>
         <Text style={styles.address}>{pet.address}</Text>
       </View>
     </Pressable>

@@ -1,5 +1,5 @@
-import PetForm from '../components/Pets/PetForm';
-import { insertPlace } from '../util/database';
+import PetForm from '../../components/Pets/PetForm';
+import { insertPlace } from '../../util/database';
 
 function AddPet({ navigation }) {
   async function createPlaceHandler(pet) {

@@ -4,13 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 
-import AllPets from './app/screens/AllPets';
-import AddPet from './app/screens/AddPet';
-import IconButton from './app/components/UI/IconButton';
-import { Colors } from './app/constants/colors';
-import Map from './app/screens/Map';
 import { init } from './app/util/database';
-import PetDetails from './app/screens/PetDetails';
 import MainNavigator from './app/screens/MainNavigator';
 
 const Stack = createNativeStackNavigator();

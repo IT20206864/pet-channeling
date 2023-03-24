@@ -32,7 +32,7 @@ function PetForm({ onCreatePlace }) {
   return (
     <ScrollView style={styles.form}>
       <View>
-        <Text style={styles.label}>Title</Text>
+        <Text style={styles.label}>Pet Name</Text>
         <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
       </View>
       <ImagePicker onTakeImage={takeImageHandler} />
@@ -63,4 +63,50 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     backgroundColor: Colors.primary100,
   },
+  text: {
+    color: '#ffffff'
+  },
+  uploadBtn: {
+    height: 20,
+    width: '35%',
+    backgroundColor: Colors.primary800,
+    marginVertical: 20,
+    justifyContent: "center",
+    paddingLeft: 20,
+    borderRadius: 5,
+  },
+  dropDown: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    margin: 4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primary500,
+  },
+  dropDownContainer: {
+    borderWidth: 1,
+    elevation: 1,
+    shadowColor: '#000',
+    alignSelf: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  dropDownSelected: {
+    color: '#2AB9FE',
+  },
+  dropDownLabel: {
+    color: '#4A4A4A',
+    fontSize: 18,
+  },
+  dropDownPlaceholder: {
+    color: '#2AB9FE',
+    fontSize: 18,
+  }
 });
