@@ -16,18 +16,16 @@ import { db } from '../../config';
 
 
 export default function ViewBid({ navigation }) {
-
-  const [staff, setstaff] = useState([]);
+  const [bid, setstaff] = useState([]);
 
   useEffect(() => {
     const colRef = collection(db, 'bid');
     onSnapshot(colRef, (QuerySnapshot) => {
-
-      const staff = [];
+      const bid = [];
       QuerySnapshot.forEach((doc) => {
         const { fullname, email, stafftype, contactNo } = doc.data();
         const staffId = doc.id;
-        staff.push({
+        bid.push({
           staffId,
           fullname,
           email,
@@ -35,7 +33,7 @@ export default function ViewBid({ navigation }) {
           contactNo,
         });
       });
-      setstaff(staff);
+      setstaff(bid);
     });
   }, []);
 
@@ -58,6 +56,7 @@ export default function ViewBid({ navigation }) {
     );
   };
 
+  //delete bid function
   async function DeleteStaff(data) {
     const ref = doc(db, 'bid', data);
     await deleteDoc(ref)
@@ -78,7 +77,7 @@ export default function ViewBid({ navigation }) {
         source={require('../../assets/pet2.png')}
         style={styles.logo}
       />
-      {staff.map((data) => {
+      {bid.map((data) => {
         return (
           <View key={data._id}>
             <View style={styles.todoContainer}>
