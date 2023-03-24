@@ -15,14 +15,14 @@ import YourReviewCard from '../../components/YourReviewCard';
 import ReviewCard from '../../components/ReviewCard';
 import { commonStyles, reviewStyles } from '../../styles';
 
-function Reviews({ navigation }) {
+function Reviews({ navigation, route }) {
   const [showHeaderTitle, setshowHeaderTitle] = useState(false);
   const [reviews, setreviews] = useState([]);
   const [myReviews, setmyReviews] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
-  const [email, setemail] = useState('cristiano@gmail.com');
-  const [channelingCentre, setchannelingCentre] = useState('ABCD1234');
-  const [name, setname] = useState('Cristiano Ronaldo');
+  const [email, setemail] = useState('anjulasjay@gmail.com');
+  const [vetName, setvetName] = useState('')
+  const [name, setname] = useState('Anjula Jayasinghe');
   const [avgRating, setavgRating] = useState('0.0');
 
   //called when user scrolls the view
@@ -44,7 +44,7 @@ function Reviews({ navigation }) {
     let rvs = [];
     let userRvs = [];
     docSnap.forEach((doc) => {
-      if (doc.data().channelingCentre === channelingCentre) {
+      if (doc.data().vetName === route.params.channeling.vetName) {
         if (doc.data().email === email) {
           userRvs.push({ id: doc.id, ...doc.data() });
         } else {
@@ -75,7 +75,9 @@ function Reviews({ navigation }) {
   };
 
   useEffect(() => {
+    setvetName(route.params.channeling.vetName);
     fetchData(true);
+
   }, []);
   return (
     <View style={[commonStyles.container, { backgroundColor: '#EEEEEE' }]}>
@@ -117,7 +119,7 @@ function Reviews({ navigation }) {
           </View>
           <TouchableNativeFeedback
             style={{ width: '100%' }}
-            onPress={() => navigation.navigate('Write Review', { channelingCentre, email, name })}
+            onPress={() => navigation.navigate('Write Review', { vetName, email, name })}
           >
             <View style={reviewStyles.writeReviewBtn}>
               <Text style={reviewStyles.writeReviewBtnTxt}>Write a Review</Text>
