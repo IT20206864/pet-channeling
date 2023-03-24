@@ -55,6 +55,12 @@ const Home = ({ navigation }) => {
             <Text style={styles.cardTitle}>View Channelings</Text>
           </View>
         </TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Bid')}>
+          <View style={styles.card}>
+            <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>Place Bid</Text>
+          </View>
+        </TouchableNativeFeedback>
       </View>
 
       <StatusBar style="auto" />
