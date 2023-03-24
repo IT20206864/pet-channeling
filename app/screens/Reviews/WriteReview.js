@@ -30,7 +30,7 @@ function WriteReview({ navigation, route }) {
       uploadImage((uploadedImageUri) => {
         console.log('uri', uploadedImageUri);
         addDoc(collection(db, 'reviews'), {
-          channelingCentre: route.params.channelingCentre,
+          vetName: route.params.vetName,
           name: route.params.name,
           email: route.params.email,
           startRating,
@@ -75,7 +75,7 @@ function WriteReview({ navigation, route }) {
 
       uploadTask.on(
         'state_changed',
-        (snapshot) => {},
+        (snapshot) => { },
         (error) => {
           ToastAndroid.show('Error Submitting Review!', ToastAndroid.SHORT);
         },

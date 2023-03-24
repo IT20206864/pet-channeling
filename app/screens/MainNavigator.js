@@ -26,6 +26,7 @@ export default function MainNavigator() {
   };
   return (
     <Stack.Navigator>
+
       <Stack.Screen name="Home" component={Home} options={headerOptions} />
       <Stack.Screen name="AddStaff" component={AddStaff} options={headerOptions} />
       <Stack.Screen name="ViewStaff" component={ViewStaff} options={headerOptions} />
@@ -38,6 +39,7 @@ export default function MainNavigator() {
       <Stack.Screen name="View Channelings" component={ViewChannelings} options={headerOptions} />
       <Stack.Screen name="Update Channeling" component={EditChanneling} options={headerOptions} />
       <Stack.Screen name="Success Screen" component={Success} options={headerOptions} />
+
 
     </Stack.Navigator>
   );

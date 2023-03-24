@@ -11,9 +11,11 @@ import { Colors } from './app/constants/colors';
 import Map from './app/screens/Map';
 import { init } from './app/util/database';
 import PetDetails from './app/screens/PetDetails';
+
 import Home from './app/screens/Home';
 import MainNavigator from './app/screens/MainNavigator';
 import { ToastProvider } from 'react-native-toast-notifications'
+
 
 const Stack = createNativeStackNavigator();
 

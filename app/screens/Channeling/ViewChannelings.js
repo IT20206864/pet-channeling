@@ -20,6 +20,7 @@ export default function ViewChannelings({ navigation }) {
         onSnapshot(colRef, (QuerySnapshot) => {
             const channeling = [];
             QuerySnapshot.forEach((doc) => {
+
                 console.log(doc.data())
                 const { petName, description, date, vetName } = doc.data();
                 console.log(date);
@@ -113,6 +114,7 @@ export default function ViewChannelings({ navigation }) {
                                 </View>
                                 <Pressable onPress={() => navigation.navigate('Write Review', { channeling })}>
                                     <View style={channelingStyles.ratingContainer}>
+
                                         <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Rate</Text>
                                     </View>
                                 </Pressable>
