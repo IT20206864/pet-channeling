@@ -11,6 +11,7 @@ import { Colors } from './app/constants/colors';
 import Map from './app/screens/Map';
 import { init } from './app/util/database';
 import PetDetails from './app/screens/PetDetails';
+import MainNavigator from './app/screens/MainNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +35,7 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator
+        {/*  <Stack.Navigator
           screenOptions={{
             headerStyle: { backgroundColor: Colors.primary500 },
             headerTintColor: Colors.gray700,
@@ -71,7 +72,8 @@ export default function App() {
               title: 'Loading Pet...',
             }}
           />
-        </Stack.Navigator>
+        </Stack.Navigator> */}
+        <MainNavigator />
       </NavigationContainer>
     </>
   );
