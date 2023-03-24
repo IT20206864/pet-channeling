@@ -16,6 +16,10 @@ import AddPet from './Pet/AddPet';
 import PetDetails from './Pet/PetDetails';
 import IconButton from '../components/UI/IconButton';
 import Map from './Pet/Map';
+import AddBid from './Pet/AddBid';
+import ViewBid from './Pet/ViewBid';
+import EditBid from './Pet/EditBid';
+import Bid from './Pet/Bid';
 
 export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
@@ -29,7 +33,11 @@ export default function MainNavigator() {
     },
   };
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#053f5c' },
+        headerTintColor: '#ffffff',
+      }}>
 
       <Stack.Screen name="Home" component={Home} options={headerOptions} />
       <Stack.Screen name="AddStaff" component={AddStaff} options={headerOptions} />
@@ -78,7 +86,10 @@ export default function MainNavigator() {
           title: 'Loading Pet...',
         }}
       />
-
+      <Stack.Screen name="AddBid" component={AddBid} options={headerOptions} />
+      <Stack.Screen name="ViewBid" component={ViewBid} options={headerOptions} />
+      <Stack.Screen name="EditBid" component={EditBid} options={headerOptions} />
+      <Stack.Screen name="Bid" component={Bid} options={headerOptions} />
     </Stack.Navigator>
   );
 }
