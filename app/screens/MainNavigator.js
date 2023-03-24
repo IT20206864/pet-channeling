@@ -10,6 +10,8 @@ import ViewStaff from './Staff/ViewStaff';
 import EditStaff from './Staff/EditStaff';
 import StaffManagement from './Staff/StaffManagement';
 import ViewChannelings from './Channeling/ViewChannelings';
+import EditChanneling from './Channeling/EditChanneling';
+import Success from '../components/Success';
 
 import AllPets from './Pet/AllPets';
 import AddPet from './Pet/AddPet';
@@ -49,13 +51,6 @@ export default function MainNavigator() {
       <Stack.Screen name="Edit Review" component={EditReview} options={headerOptions} />
       <Stack.Screen name="Channel Doctor" component={ChannelDoc} options={headerOptions} />
       <Stack.Screen name="View Channelings" component={ViewChannelings} options={headerOptions} />
-      {/* <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: Colors.primary500 },
-          headerTintColor: Colors.gray700,
-          contentStyle: { backgroundColor: Colors.gray700 },
-        }}
-      > */}
       <Stack.Screen
         name="AllPets"
         component={AllPets}
@@ -90,6 +85,8 @@ export default function MainNavigator() {
       <Stack.Screen name="ViewBid" component={ViewBid} options={headerOptions} />
       <Stack.Screen name="EditBid" component={EditBid} options={headerOptions} />
       <Stack.Screen name="Bid" component={Bid} options={headerOptions} />
+      <Stack.Screen name="Update Channeling" component={EditChanneling} options={headerOptions} />
+      <Stack.Screen name="Success Screen" component={Success} options={headerOptions} />
     </Stack.Navigator>
   );
 }

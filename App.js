@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 
 import { init } from './app/util/database';
+
 import MainNavigator from './app/screens/MainNavigator';
+import { ToastProvider } from 'react-native-toast-notifications';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -26,13 +29,12 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <>
-      <StatusBar style="dark" />
+    <ToastProvider>
       <NavigationContainer>
         <MainNavigator />
       </NavigationContainer>
-    </>
-  );
+    </ToastProvider>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -43,3 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
+
