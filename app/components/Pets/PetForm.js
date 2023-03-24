@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 
 import { Colors } from '../../constants/colors';
 import { Pet } from '../../models/pet';
@@ -30,15 +30,30 @@ function PetForm({ onCreatePlace }) {
   }
 
   return (
-    <ScrollView style={styles.form}>
-      <View>
-        <Text style={styles.label}>Title</Text>
-        <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
-      </View>
-      <ImagePicker onTakeImage={takeImageHandler} />
-      <LocationPicker onPickLocation={pickLocationHandler} />
-      <Button onPress={savePlaceHandler}>Add Pet</Button>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.form}>
+        <Text style={styles.logoText}>Add New Pet</Text>
+        <Text style={styles.heading2}>In the screen you would be able to add your pets</Text>
+        <Image
+          resizeMode="contain"
+          source={require('../../assets/pet5.png')}
+          style={styles.logo}
+        />
+        <View>
+          <Text style={styles.label}>Pet Name</Text>
+          <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
+        </View>
+        <View style={{ paddingTop: 10 }}>
+          <ImagePicker onTakeImage={takeImageHandler} />
+        </View>
+        <View style={{ paddingTop: 10 }}>
+          <LocationPicker onPickLocation={pickLocationHandler} />
+        </View>
+        <View style={{ paddingTop: 10, marginBottom: 90 }}>
+          <Button onPress={savePlaceHandler}>Add Pet</Button>
+        </View>
+      </ScrollView >
+    </View>
   );
 }
 
@@ -49,10 +64,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
+  container: {
+    paddingTop: 10,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  logo: {
+    marginBottom: 10,
+  },
   label: {
-    fontWeight: 'bold',
+    fontWeight: 'regular',
     marginBottom: 4,
-    color: Colors.primary500,
+    color: '#000000',
   },
   input: {
     marginVertical: 8,
@@ -62,5 +85,61 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.primary700,
     borderBottomWidth: 2,
     backgroundColor: Colors.primary100,
+  },
+  text: {
+    color: '#ffffff'
+  },
+  uploadBtn: {
+    height: 20,
+    width: '35%',
+    backgroundColor: Colors.primary800,
+    marginVertical: 20,
+    justifyContent: "center",
+    paddingLeft: 20,
+    borderRadius: 5,
+  },
+  dropDown: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    margin: 4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primary500,
+  },
+  dropDownContainer: {
+    borderWidth: 1,
+    elevation: 1,
+    shadowColor: '#000',
+    alignSelf: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  dropDownSelected: {
+    color: '#2AB9FE',
+  },
+  dropDownLabel: {
+    color: '#4A4A4A',
+    fontSize: 18,
+  },
+  dropDownPlaceholder: {
+    color: '#2AB9FE',
+    fontSize: 18,
+  },
+  logoText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  heading2: {
+    fontSize: 15,
+    color: '#000000',
+    paddingBottom: 40
   },
 });

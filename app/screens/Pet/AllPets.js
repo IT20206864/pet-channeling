@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
-import PetsList from '../components/Pets/PetsList';
-import { fetchPlaces } from '../util/database';
+import PetsList from '../../components/Pets/PetsList';
+import { fetchPlaces } from '../../util/database';
 
 function AllPets({ route }) {
   const [loadedPlaces, setLoadedPlaces] = useState([]);

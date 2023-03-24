@@ -11,6 +11,8 @@ function PetItem({ pet, onSelect }) {
       <Image style={styles.image} source={{ uri: pet.imageUri }} />
       <View style={styles.info}>
         <Text style={styles.title}>{pet.title}</Text>
+        <Text style={styles.phone}>{pet.phone}</Text>
+        <Text style={styles.email}>{pet.email}</Text>
         <Text style={styles.address}>{pet.address}</Text>
       </View>
     </Pressable>
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderRadius: 6,
     marginVertical: 12,
-    backgroundColor: Colors.primary500,
+    backgroundColor: '#053f5c',
     elevation: 2,
     shadowColor: 'black',
     shadowOpacity: 0.15,
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 2,
-    padding: 12,
+    padding: 14,
   },
   title: {
     fontWeight: 'bold',
