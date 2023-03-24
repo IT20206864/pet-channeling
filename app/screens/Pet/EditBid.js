@@ -175,6 +175,7 @@ const getStyles = (theme) =>
       fontSize: 18,
       marginBottom: 10,
       color: '#4A4A4A',
+      backgroundColor: '#E5E4E2',
     },
     label: {
       marginVertical: 5,
@@ -186,7 +187,7 @@ const getStyles = (theme) =>
       alignContent: 'center',
     },
     dropDown: {
-      backgroundColor: '#F3F1F1',
+      backgroundColor: '#E5E4E2',
       height: 40,
       width: '100%',
       padding: 10,
