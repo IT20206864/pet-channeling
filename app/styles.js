@@ -260,3 +260,131 @@ export const reviewStyles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export const channelingStyles = StyleSheet.create({
+  container: {
+    paddingTop: 30,
+    flex: 1,
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+  },
+  header: {
+    color: '#000000',
+    paddingBottom: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginLeft: 20,
+  },
+  textInput: {
+    backgroundColor: '#F3F1F1',
+    padding: 10,
+    height: 40,
+    width: '100%',
+    fontSize: 18,
+    marginBottom: 10,
+    color: '#4A4A4A',
+  },
+  label: {
+    marginVertical: 5,
+    fontSize: 18,
+    color: '#808080',
+    paddingBottom: 20,
+  },
+  scrollContainer: {
+    padding: 10,
+    alignContent: 'center',
+  },
+  dropDown: {
+    backgroundColor: '#F3F1F1',
+    height: 40,
+    width: '100%',
+    padding: 10,
+    borderRadius: 5,
+    fontSize: 18,
+    marginBottom: 10,
+    borderWidth: 0,
+    color: '#4A4A4A',
+    borderWidth: 1,
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  dropDownContainer: {
+    borderWidth: 1,
+    elevation: 1,
+    shadowColor: '#000',
+    alignSelf: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+  dropDownSelected: {
+    color: '#2AB9FE',
+  },
+  dropDownLabel: {
+    color: '#4A4A4A',
+    fontSize: 18,
+  },
+  dropDownPlaceholder: {
+    color: '#b5b5ba',
+    fontSize: 18,
+  },
+  toggleButton: {
+    backgroundColor: '#555',
+    borderRadius: 5,
+    padding: 10,
+    width: '70%',
+    alignItems: 'left',
+  },
+  toggleText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  toggleContainer: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+  },
+  formContainer: {
+    marginLeft: 20,
+    marginTop: 10,
+  },
+  cameraBtn: {
+    height: 20,
+    width: '30%',
+    backgroundColor: SECONDARY_COLOR,
+    marginVertical: 20,
+    justifyContent: "center",
+    paddingLeft: 20,
+    borderRadius: 10,
+
+  },
+  cameraBtnText: {
+    color: '#fff'
+  },
+
+  chanellingsContainer: {
+    backgroundColor: "#7FC9DA",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
+});
+
+
+
+

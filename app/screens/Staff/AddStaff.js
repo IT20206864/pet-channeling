@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { db } from '../../config';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { addDoc, collection } from 'firebase/firestore';
 import Toggle from 'react-native-toggle-element';
@@ -12,13 +20,13 @@ const AddStaff = ({ navigation }) => {
   const [contactNo, setcontactNo] = useState('');
 
   const [categories, setcategories] = useState([
-    { label: 'veterinarian  ', value: 'veterinarian' },
-    { label: 'veterinary technician', value: 'veterinary technician' },
+    { label: 'Veterinarian  ', value: 'Veterinarian' },
+    { label: 'Veterinary Technician', value: 'Veterinary Technician' },
   ]);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [selectedCategory, setselectedCategory] = useState(null);
-  const [theme, setTheme] = useState('dark');
-  const [toggleValue, setToggleValue] = useState(false);
+  const [theme, setTheme] = useState('light');
+  const [toggleValue, setToggleValue] = useState(true);
 
   const styles = getStyles(theme);
 
@@ -43,6 +51,7 @@ const AddStaff = ({ navigation }) => {
         setemail('');
         setcontactNo('');
         setselectedCategory(null);
+        showToast('Staff Member Added Successfully!');
         navigation.navigate('ViewStaff');
       })
       .catch((error) => {
@@ -65,6 +74,11 @@ const AddStaff = ({ navigation }) => {
     setcontactNo('');
     setselectedCategory(null);
   }
+
+  //show toast message
+  const showToast = (msg) => {
+    ToastAndroid.show(msg, ToastAndroid.SHORT);
+  };
 
   return (
     <>
@@ -140,7 +154,7 @@ const AddStaff = ({ navigation }) => {
             onPress={() => AddStaff()}
             activeOpacity={0.7}
             style={{
-              height: 55,
+              height: 45,
               width: '100%',
               backgroundColor: '#f7ad19',
               marginVertical: 20,
@@ -155,7 +169,7 @@ const AddStaff = ({ navigation }) => {
             onPress={() => clearStaff()}
             activeOpacity={0.7}
             style={{
-              height: 55,
+              height: 45,
               width: '100%',
               backgroundColor: '#053f5c',
               justifyContent: 'center',

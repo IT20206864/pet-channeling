@@ -73,7 +73,7 @@ export default function ViewStaff({ navigation }) {
                 <Text key={data._id} style={styles.todoTitle}>
                   {data.fullname}
                 </Text>
-                <Text key={data._id} style={styles.subTitle}>
+                <Text key={data._id} style={styles.todoSubTitle}>
                   {'Title :' + data.stafftype}
                 </Text>
                 <Text key={data._id} style={styles.subTitle}>
@@ -132,9 +132,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
   },
+  todoSubTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
   subTitle: {
+    fontWeight: 'bold',
     marginTop: '1%',
-    opacity: 0.6,
+
     fontSize: 15,
   },
   iconsContainer: {

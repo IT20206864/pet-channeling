@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { db } from '../../config';
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Alert,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { addDoc, collection, updateDoc, doc } from 'firebase/firestore';
 import Toggle from 'react-native-toggle-element';
@@ -13,13 +22,13 @@ const EditStaff = ({ route, navigation }) => {
   const [contactNo, setcontactNo] = useState(route.params.data.contactNo);
 
   const [categories, setcategories] = useState([
-    { label: 'veterinarian  ', value: 'veterinarian' },
-    { label: 'veterinary technician', value: 'veterinary technician' },
+    { label: 'Veterinarian  ', value: 'Veterinarian' },
+    { label: 'Veterinary Technician', value: 'Veterinary Technician' },
   ]);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [selectedCategory, setselectedCategory] = useState(route.params.data.stafftype);
-  const [theme, setTheme] = useState('dark');
-  const [toggleValue, setToggleValue] = useState(false);
+  const [theme, setTheme] = useState('light');
+  const [toggleValue, setToggleValue] = useState(true);
 
   const styles = getStyles(theme);
 
@@ -27,6 +36,29 @@ const EditStaff = ({ route, navigation }) => {
     setToggleValue(newState);
     console.log(newState);
     setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  const showConfirmDialog = () => {
+    return Alert.alert(
+      'Are your sure?',
+      'Are you sure you want to Update this Staff Member? This action cannot be undone!',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            updateStaff();
+          },
+        },
+        {
+          text: 'No',
+        },
+      ]
+    );
+  };
+
+  //show toast message
+  const showToast = (msg) => {
+    ToastAndroid.show(msg, ToastAndroid.SHORT);
   };
 
   async function updateStaff() {
@@ -37,7 +69,8 @@ const EditStaff = ({ route, navigation }) => {
       stafftype: selectedCategory,
       contactNo: contactNo,
     })
-      .then(() => {
+      .then(async () => {
+        showToast('Staff Member Updated Successfully!');
         navigation.navigate('ViewStaff');
       })
       .catch((error) => {
@@ -114,7 +147,7 @@ const EditStaff = ({ route, navigation }) => {
           ></TextInput>
 
           <TouchableOpacity
-            onPress={() => updateStaff()}
+            onPress={() => showConfirmDialog()}
             activeOpacity={0.7}
             style={{
               height: 55,
@@ -220,4 +253,4 @@ const getStyles = (theme) =>
     },
   });
 
-export default EditStaff;
+export default EditStaff
