@@ -5,26 +5,36 @@ import { Entypo } from '@expo/vector-icons';
 import { collection, doc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config';
 import { commonStyles, channelingStyles } from '../../styles';
+import { useToast } from "react-native-toast-notifications";
+import LoadingIndicator from '../../components/LoadingIndicator';
+
 export default function ViewChannelings({ navigation }) {
     const [channelings, setChannelings] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const toast = useToast();
 
     useEffect(() => {
+        setLoading(true);
         const colRef = collection(db, 'channelings');
         onSnapshot(colRef, (QuerySnapshot) => {
             const channeling = [];
             QuerySnapshot.forEach((doc) => {
-                console.log(doc.id)
-                const { petName, description, date } = doc.data();
-                let cDate = date.toDate().toString()
+                console.log(doc.data())
+                const { petName, description, date, vetName } = doc.data();
+                console.log(date);
+                let cDate = new Date(date).toString()
                 const id = doc.id;
                 channeling.push({
                     id,
                     petName,
                     description,
                     cDate,
+                    vetName,
                 });
             });
             setChannelings(channeling);
+            setLoading(false);
         });
     }, []);
 
@@ -33,7 +43,7 @@ export default function ViewChannelings({ navigation }) {
         console.log(id);
         return Alert.alert(
             'Are your sure?',
-            'Are you sure you want to Delete this Staff Member? This action cannot be undone!',
+            'Are you sure you want to Remove this Booking? This action cannot be undone!',
             [
                 {
                     text: 'Yes',
@@ -50,12 +60,16 @@ export default function ViewChannelings({ navigation }) {
 
     // function to remove channeling
     async function deleteChanneling(id) {
-        console.log(id)
-
-        const ref = doc(db, 'channeling', id);
+        const ref = doc(db, 'channelings', id);
         await deleteDoc(ref)
             .then(() => {
-                alert('Reservation Deleted Successfully!');
+                toast.show("Reservation Cancelled !", {
+                    type: "danger",
+                    placement: "bottom",
+                    duration: 4000,
+                    offset: 30,
+                    animationType: "slide-in",
+                });
             })
             .catch((error) => {
                 alert(error.message);
@@ -63,39 +77,42 @@ export default function ViewChannelings({ navigation }) {
     }
     return (
         <>
-            <Text style={channelingStyles.header}>My Channelings</Text>
-            <ScrollView>
+            <Text style={[channelingStyles.header, { marginTop: 20, marginBottom: 10 }]}>My Channelings</Text>
+            <ScrollView style={channelingStyles.scrollContainer}>
+                {loading ? <LoadingIndicator /> : null}
                 {channelings.map((channeling) => {
                     return (
                         <View key={channeling.id} style={channelingStyles.chanellingsContainer}>
-                            <View style={channelingStyles.todoDetails}>
+                            <View style={channelingStyles.cardDetails}>
                                 <Text key={channeling.id} style={channelingStyles.cardTitle}>
                                     {channeling.petName}
                                 </Text>
-                                <Text key={channeling.id} style={channelingStyles.cardSubTitle}>
+                                <Text key={channeling.id} style={channelingStyles.cardSubTitle1}>
                                     {channeling.description}
                                 </Text>
-                                <Text key={channeling.id} style={channelingStyles.cardSubTitle}>
+                                <Text key={channeling.id} style={channelingStyles.cardSubTitle2}>
                                     {channeling.cDate}
                                 </Text>
                             </View>
-                            <View style={channelingStyles.iconsContainer}>
-                                <Pressable onPress={() => navigation.navigate('Edit Channeling', { channeling })}>
-                                    <View style={channelingStyles.iconContainer}>
-                                        <Entypo name="edit" size={24} color="black" />
-                                    </View>
-                                </Pressable>
-                                <Pressable
-                                    onPress={() => {
-                                        showConfirmDialog(channeling.id);
-                                    }}
-                                >
-                                    <View style={channelingStyles.iconContainer}>
-                                        <AntDesign name="delete" size={24} color="red" />
-                                    </View>
-                                </Pressable>
+                            <View style={channelingStyles.btnLayout}>
+                                <View style={channelingStyles.iconsContainer}>
+                                    <Pressable onPress={() => navigation.navigate('Update Channeling', { channeling })}>
+                                        <View style={channelingStyles.iconContainer}>
+                                            <Entypo name="edit" size={24} color="black" />
+                                        </View>
+                                    </Pressable>
+                                    <Pressable
+                                        onPress={() => {
+                                            showConfirmDialog(channeling.id);
+                                        }}
+                                    >
+                                        <View style={channelingStyles.iconContainer}>
+                                            <AntDesign name="delete" size={24} color="red" />
+                                        </View>
+                                    </Pressable>
+                                </View>
                                 <Pressable onPress={() => navigation.navigate('Write Review', { channeling })}>
-                                    <View style={channelingStyles.iconContainer}>
+                                    <View style={channelingStyles.ratingContainer}>
                                         <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Rate</Text>
                                     </View>
                                 </Pressable>
@@ -104,7 +121,6 @@ export default function ViewChannelings({ navigation }) {
                     )
                 })
                 }
-
             </ScrollView>
         </>
     )

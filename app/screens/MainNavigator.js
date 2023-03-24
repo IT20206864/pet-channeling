@@ -10,6 +10,8 @@ import ViewStaff from './Staff/ViewStaff';
 import EditStaff from './Staff/EditStaff';
 import StaffManagement from './Staff/StaffManagement';
 import ViewChannelings from './Channeling/ViewChannelings';
+import EditChanneling from './Channeling/EditChanneling';
+import Success from '../components/Success';
 
 export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
@@ -34,6 +36,8 @@ export default function MainNavigator() {
       <Stack.Screen name="Edit Review" component={EditReview} options={headerOptions} />
       <Stack.Screen name="Channel Doctor" component={ChannelDoc} options={headerOptions} />
       <Stack.Screen name="View Channelings" component={ViewChannelings} options={headerOptions} />
+      <Stack.Screen name="Update Channeling" component={EditChanneling} options={headerOptions} />
+      <Stack.Screen name="Success Screen" component={Success} options={headerOptions} />
 
     </Stack.Navigator>
   );

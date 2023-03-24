@@ -284,15 +284,22 @@ export const channelingStyles = StyleSheet.create({
     marginBottom: 10,
     color: '#4A4A4A',
   },
-  label: {
-    marginVertical: 5,
+  label1: {
+    marginBottom: 2,
     fontSize: 18,
     color: '#808080',
     paddingBottom: 20,
   },
+  label2: {
+    marginBottom: 2,
+    fontSize: 18,
+    color: '#808080',
+    paddingBottom: 20,
+    marginTop: 20,
+  },
   scrollContainer: {
-    padding: 10,
-    alignContent: 'center',
+    width: "100%",
+    paddingRight: 20,
   },
   dropDown: {
     backgroundColor: '#F3F1F1',
@@ -306,7 +313,7 @@ export const channelingStyles = StyleSheet.create({
     color: '#4A4A4A',
     borderWidth: 1,
     alignSelf: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
   },
   dropDownContainer: {
     borderWidth: 1,
@@ -352,12 +359,13 @@ export const channelingStyles = StyleSheet.create({
     marginTop: 10,
   },
   cameraBtn: {
-    height: 20,
-    width: '30%',
+    height: 40,
+    width: '35%',
     backgroundColor: SECONDARY_COLOR,
-    marginVertical: 20,
+    marginVertical: 10,
+    marginHorizontal: 10,
     justifyContent: "center",
-    paddingLeft: 20,
+    paddingLeft: 18,
     borderRadius: 10,
 
   },
@@ -366,11 +374,14 @@ export const channelingStyles = StyleSheet.create({
   },
 
   chanellingsContainer: {
+    marginHorizontal: 10,
     backgroundColor: "#7FC9DA",
     flexDirection: "row",
-    alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 5,
     justifyContent: "space-between",
     width: "100%",
+    height: 100,
     marginBottom: 10,
     borderRadius: 10,
     shadowColor: "#000",
@@ -382,6 +393,61 @@ export const channelingStyles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 8,
+  },
+  imageBtns: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  iconsContainer: {
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginHorizontal: '2%',
+  },
+  iconContainer: {
+    padding: '3%',
+    marginHorizontal: '1%',
+  },
+  ratingContainer: {
+    alignItems: "center",
+    marginTop: 25,
+    backgroundColor: "#053f5c",
+    borderRadius: 10,
+    height: 25,
+    borderBottomLeftRadius: 70,
+  },
+  cardTitle: {
+    textTransform: "uppercase",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  cardSubTitle1: {
+    fontSize: 16,
+    fontWeight: "400",
+  },
+  cardSubTitle2: {
+    marginTop: 10,
+    fontWeight: "500",
+  },
+  multiline: {
+    marginVertical: 20,
+    borderWidth: 2,
+    borderColor: SECONDARY_COLOR,
+    borderRadius: 16,
+    height: 80,
+    textAlignVertical: 'top',
+    padding: 10,
+    fontSize: 14,
+  },
+  dateContainer: {
+    alignItems: "flex-start",
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    borderRadius: 16
   },
 });
 
