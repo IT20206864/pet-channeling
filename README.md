@@ -25,11 +25,8 @@ Below illustrates the architecture diagram of the system in a high-level view. T
 
 The following screens are the screenshots of the live mobile app running.
 
-<div style="display:flex; flex-wrap:wrap;">
-  <img src="./app/assets/img.png" alt="screen1" width="250" style="flex:1; margin: 5px;">
-  <img src="./app/assets/img.png" alt="screen2" width="250" style="flex:1; margin: 5px;">
-  <img src="./app/assets/img.png" alt="screen3" width="250" style="flex:1; margin: 5px;">
- </div>
+The following screens are the screenshots of the live mobile app running.
+[Google Drive Link : Screenshots](https://drive.google.com/drive/folders/1kWSNbm6m1ect_BKC_vLgXhDvvNlmQU1h?usp=share_link)
 
 ## Technology Stack
 
