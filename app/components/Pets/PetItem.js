@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderRadius: 6,
     marginVertical: 12,
-    backgroundColor: Colors.primary500,
+    backgroundColor: '#053f5c',
     elevation: 2,
     shadowColor: 'black',
     shadowOpacity: 0.15,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 2,
-    padding: 12,
+    padding: 14,
   },
   title: {
     fontWeight: 'bold',
