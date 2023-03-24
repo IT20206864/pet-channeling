@@ -28,12 +28,12 @@ const Home = ({ navigation }) => {
             <Text style={styles.cardTitle}>Chanelling</Text>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('StaffManagement')}>
+        {/* <TouchableNativeFeedback onPress={() => navigation.navigate('StaffManagement')}>
           <View style={styles.card}>
             <MaterialIcons name="feedback" size={28} color="black" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>User Reviews</Text>
           </View>
-        </TouchableNativeFeedback>
+        </TouchableNativeFeedback> */}
         <TouchableNativeFeedback onPress={() => navigation.navigate('StaffManagement')}>
           <View style={styles.card}>
             <FontAwesome5 name="hospital-user" size={28} color="black" style={styles.cardIcon} />

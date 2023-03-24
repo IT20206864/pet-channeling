@@ -14,7 +14,7 @@ export default function ViewChannelings({ navigation }) {
             const channeling = [];
             QuerySnapshot.forEach((doc) => {
                 console.log(doc.id)
-                const { petName, description, date } = doc.data();
+                const { petName, description, date, vetName } = doc.data();
                 let cDate = date.toDate().toString()
                 const id = doc.id;
                 channeling.push({
@@ -22,6 +22,7 @@ export default function ViewChannelings({ navigation }) {
                     petName,
                     description,
                     cDate,
+                    vetName
                 });
             });
             setChannelings(channeling);
@@ -94,7 +95,7 @@ export default function ViewChannelings({ navigation }) {
                                         <AntDesign name="delete" size={24} color="red" />
                                     </View>
                                 </Pressable>
-                                <Pressable onPress={() => navigation.navigate('Write Review', { channeling })}>
+                                <Pressable onPress={() => navigation.navigate('Reviews', { channeling })}>
                                     <View style={channelingStyles.iconContainer}>
                                         <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Rate</Text>
                                     </View>

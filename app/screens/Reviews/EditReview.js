@@ -36,7 +36,7 @@ function EditReview({ navigation, route }) {
       setloading(true);
       uploadImage((uploadedImageUri, delImg) => {
         updateDoc(doc(db, 'reviews', route.params.review.id), {
-          channelingCentre: route.params.review.channelingCentre,
+          vetName: route.params.review.vetName,
           name: route.params.review.name,
           email: route.params.review.email,
           startRating,
@@ -87,7 +87,7 @@ function EditReview({ navigation, route }) {
 
         uploadTask.on(
           'state_changed',
-          (snapshot) => {},
+          (snapshot) => { },
           (error) => {
             ToastAndroid.show('Error Submitting Review!', ToastAndroid.SHORT);
           },
