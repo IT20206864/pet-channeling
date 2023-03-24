@@ -6,6 +6,7 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../config';
 import ImageView from 'react-native-image-viewing';
 import { reviewStyles } from '../styles';
+import moment from 'moment';
 
 function ReviewCard({ review, email, fetchData }) {
   const [showImageViewer, setshowImageViewer] = useState(false);
@@ -71,7 +72,7 @@ function ReviewCard({ review, email, fetchData }) {
             <Text style={reviewStyles.reviewStars}>{review.startRating.toFixed(1)} star(s)</Text>
           </View>
         </View>
-        <Text style={reviewStyles.reviewDate}>{review.date}</Text>
+        <Text style={reviewStyles.reviewDate}>{moment(review.date).fromNow()}</Text>
       </View>
       {review.comment !== '' ? (
         <View style={reviewStyles.reviewTextContainer}>
