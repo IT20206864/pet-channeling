@@ -1,3 +1,11 @@
+/**
+ * A component that allows users to pick a location either by their device's current location
+ * or by picking a location on a map.
+ * 
+ * @param {Function} onPickLocation - A function that handles the location picked by the user.
+ * @returns {JSX.Element} - Returns the JSX representation of the LocationPicker component.
+ */
+
 import { useEffect, useState } from 'react';
 import { Alert, View, StyleSheet, Image, Text } from 'react-native';
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location';

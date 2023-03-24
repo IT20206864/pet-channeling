@@ -1,3 +1,8 @@
+/**
+ * Component responsible for adding new pets to the database.
+ * @param {Object} navigation - Navigation object used to navigate between screens.
+*/
+
 import PetForm from '../../components/Pets/PetForm';
 import { insertPlace } from '../../util/database';
 

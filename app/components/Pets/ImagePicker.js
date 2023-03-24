@@ -1,3 +1,8 @@
+/**
+ * @description Component that allows the user to take a picture with the camera and displays a preview of the taken image.
+ * @param {function} onTakeImage - Function to be called when an image is taken with the camera.
+*/
+
 import { Alert, Image, StyleSheet, Text, View } from 'react-native';
 import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 import { useState } from 'react';
@@ -6,10 +11,14 @@ import { Colors } from '../../constants/colors';
 import OutlinedButton from '../UI/OutlinedButton';
 
 function ImagePicker({ onTakeImage }) {
+
+  // State to store the URI of the captured image
   const [pickedImage, setPickedImage] = useState();
 
+  // Get camera permissions and status
   const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
 
+  // Verify camera permissions
   async function verifyPermissions() {
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
       const permissionResponse = await requestPermission();
@@ -28,6 +37,7 @@ function ImagePicker({ onTakeImage }) {
     return true;
   }
 
+  // Handler for taking image using the device camera
   async function takeImageHandler() {
     const hasPermission = await verifyPermissions();
 
@@ -46,6 +56,7 @@ function ImagePicker({ onTakeImage }) {
     onTakeImage(image.uri);
   }
 
+  // Display a preview of the captured image
   let imagePreview = <Text>No image taken yet.</Text>;
 
   if (pickedImage) {

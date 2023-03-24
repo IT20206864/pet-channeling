@@ -1,3 +1,14 @@
+/**
+ * @description This is a functional component named "PetDetails". It receives props such as `route` and `navigation` from its parent component. 
+ * This component renders the details of a pet, including an image, some text information, and an "OutlinedButton" component. 
+ * It also fetches the details of a selected pet from a database and loads it into state. If the data is not available, it renders a fallback view with a loading message.
+ *
+ * @param {object} route - Contains the parameters passed to this component, which includes the `placeId`.
+ * @param {object} navigation - Allows the component to navigate to other screens in the app.
+ *
+ * @returns If `fetchedPlace` is not yet available, it returns a fallback view with a loading message. Otherwise, it returns the details of the selected pet. 
+ */
+
 import { useEffect, useState } from 'react';
 import { ScrollView, Image, View, Text, StyleSheet } from 'react-native';
 
