@@ -1,3 +1,10 @@
+/**
+ * Add Bid Component
+ * @description A component to add a new bid to the database.
+ * @param {Object} navigation - The navigation object used for navigating between screens.
+ * @returns A JSX element containing form fields for adding a new bid.
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
