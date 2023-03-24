@@ -1,3 +1,8 @@
+/**
+ * Component for creating a new pet form with title, image, and location
+ * @param {Function} onCreatePlace - function to create a new pet
+ */
+
 import { useCallback, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View, Image } from 'react-native';
 
@@ -8,22 +13,39 @@ import ImagePicker from './ImagePicker';
 import LocationPicker from './LocationPicker';
 
 function PetForm({ onCreatePlace }) {
+
+  // State variables for the entered title, selected image, and picked location
   const [enteredTitle, setEnteredTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setPickedLocation] = useState();
 
+  /**
+   * Handler function to update the entered title state
+   * @param {String} enteredText - the entered text for the title
+   */
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
   }
 
+  /**
+   * Handler function to update the selected image state
+   * @param {String} imageUri - the URI of the selected image
+   */
   function takeImageHandler(imageUri) {
     setSelectedImage(imageUri);
   }
 
+  /**
+   * Handler function to update the picked location state
+   * @param {Object} location - the picked location object with latitude and longitude properties
+   */
   const pickLocationHandler = useCallback((location) => {
     setPickedLocation(location);
   }, []);
 
+  /**
+   * Handler function to create a new pet with the entered title, selected image, and picked location
+   */
   function savePlaceHandler() {
     const placeData = new Pet(enteredTitle, selectedImage, pickedLocation);
     onCreatePlace(placeData);

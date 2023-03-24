@@ -1,3 +1,8 @@
+/**
+ * @description This is a functional component for the Bid screen
+ * @param {object} navigation - Navigation object with different methods to navigate between screens
+*/
+
 import React, { useEffect, useRef } from 'react';
 import { View, Text, Image, StyleSheet, Animated, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

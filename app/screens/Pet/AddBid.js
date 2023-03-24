@@ -1,3 +1,10 @@
+/**
+ * Add Bid Component
+ * @description A component to add a new bid to the database.
+ * @param {Object} navigation - The navigation object used for navigating between screens.
+ * @returns A JSX element containing form fields for adding a new bid.
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
@@ -56,6 +63,14 @@ const AddBid = ({ navigation }) => {
 
   // Validation
   function AddBid() {
+
+    // Check that fullname, email, and contactNo are all strings
+    if (typeof fullname !== 'string' || typeof email !== 'string' || typeof contactNo !== 'string') {
+      alert('Name, Mail, and Phone must be strings');
+      return;
+    }
+
+    // Check if input feilds are not empty
     if (fullname.length == 0 || email.length == 0 || contactNo.length == 0) {
       alert('The fields Name, Mail and Phone are required');
       return;
@@ -190,6 +205,7 @@ const getStyles = (theme) =>
       paddingTop: 20,
       flex: 1,
       flexDirection: 'column',
+      marginBottom: 50,
     },
     header: {
       paddingBottom: 10,

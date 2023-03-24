@@ -1,18 +1,28 @@
+/**
+ * This is a react native component for viewing and deleting bid records. It fetches bid records from a 
+ * Firebase Firestore collection and displays them in a ScrollView. It also provides a confirmation dialog box to delete a bid record.
+ * 
+ * @param {object} navigation - A navigation object used to navigate between screens.
+ * 
+ * Displays a confirmation dialog box to confirm deletion of a bid record.
+ * @param {object} data - The bid record to be deleted.
+*/
+
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, Alert, LogBox, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { collection, doc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config';
 
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default function ViewBid({ navigation }) {
+
   const [staff, setstaff] = useState([]);
 
   useEffect(() => {
     const colRef = collection(db, 'bid');
     onSnapshot(colRef, (QuerySnapshot) => {
+
       const staff = [];
       QuerySnapshot.forEach((doc) => {
         const { fullname, email, stafftype, contactNo } = doc.data();
@@ -29,7 +39,6 @@ export default function ViewBid({ navigation }) {
     });
   }, []);
 
-  //confirmation dialog box
   const showConfirmDialog = (data) => {
     console.log(data);
     return Alert.alert(
@@ -49,7 +58,6 @@ export default function ViewBid({ navigation }) {
     );
   };
 
-  //delete staff function
   async function DeleteStaff(data) {
     const ref = doc(db, 'bid', data);
     await deleteDoc(ref)

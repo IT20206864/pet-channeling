@@ -1,3 +1,9 @@
+/**
+* A screen component that allows a user to edit a bid record
+* @param {Object} route - The route object containing data about the screen's route
+* @param {Object} navigation - The navigation object containing methods for navigating between screens
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
@@ -169,6 +175,7 @@ const getStyles = (theme) =>
       fontSize: 18,
       marginBottom: 10,
       color: '#4A4A4A',
+      backgroundColor: '#E5E4E2',
     },
     label: {
       marginVertical: 5,
@@ -180,7 +187,7 @@ const getStyles = (theme) =>
       alignContent: 'center',
     },
     dropDown: {
-      backgroundColor: '#F3F1F1',
+      backgroundColor: '#E5E4E2',
       height: 40,
       width: '100%',
       padding: 10,
