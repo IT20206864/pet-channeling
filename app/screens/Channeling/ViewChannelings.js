@@ -112,7 +112,7 @@ export default function ViewChannelings({ navigation }) {
                                         </View>
                                     </Pressable>
                                 </View>
-                                <Pressable onPress={() => navigation.navigate('Write Review', { channeling })}>
+                                <Pressable onPress={() => navigation.navigate('Reviews', { channeling })}>
                                     <View style={channelingStyles.ratingContainer}>
 
                                         <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Rate</Text>
