@@ -1,7 +1,17 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+/**
+ * Represents a component for displaying a pet item in a list.
+ * @param {Object} pet - An object representing the pet item to be displayed.
+ * @param {Function} onSelect - A function to be executed when the pet item is selected.
+*/
 
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../constants/colors';
 
+
+/**
+ * A callback function to be executed when the pet item is selected.
+ * @param {string} petId - The ID of the selected pet item.
+*/
 function PetItem({ pet, onSelect }) {
   return (
     <Pressable
@@ -11,6 +21,8 @@ function PetItem({ pet, onSelect }) {
       <Image style={styles.image} source={{ uri: pet.imageUri }} />
       <View style={styles.info}>
         <Text style={styles.title}>{pet.title}</Text>
+        <Text style={styles.phone}>{pet.phone}</Text>
+        <Text style={styles.email}>{pet.email}</Text>
         <Text style={styles.address}>{pet.address}</Text>
       </View>
     </Pressable>
@@ -25,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderRadius: 6,
     marginVertical: 12,
-    backgroundColor: Colors.primary500,
+    backgroundColor: '#053f5c',
     elevation: 2,
     shadowColor: 'black',
     shadowOpacity: 0.15,
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 2,
-    padding: 12,
+    padding: 14,
   },
   title: {
     fontWeight: 'bold',

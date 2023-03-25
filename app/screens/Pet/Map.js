@@ -1,8 +1,15 @@
+/**
+ * A screen component for displaying and selecting a location on a map.
+ *
+ * @param {object} navigation - The navigation object from React Navigation.
+ * @param {object} route - The route object from React Navigation.
+ */
+
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-import IconButton from '../components/UI/IconButton';
+import IconButton from '../../components/UI/IconButton';
 
 function Map({ navigation, route }) {
   const initialLocation = route.params && {

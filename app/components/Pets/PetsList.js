@@ -1,18 +1,29 @@
+/**
+ * A component to display a list of pets.
+ * @param {Object[]} pets - An array of pets to display.
+*/
+
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { Colors } from '../../constants/colors';
 import PetItem from './PetItem';
 
 function PetsList({ pets }) {
+
+  // Get navigation object to navigate to PetDetails screen
   const navigation = useNavigation();
 
+  /**
+   * Handler function to navigate to PetDetails screen when a pet is selected.
+   * @param {string} id - The id of the selected pet.
+  */
   function selectPlaceHandler(id) {
     navigation.navigate('PetDetails', {
       placeId: id,
     });
   }
 
+  // If there are no pets, display a fallback text
   if (!pets || pets.length === 0) {
     return (
       <View style={styles.fallbackContainer}>
@@ -44,6 +55,6 @@ const styles = StyleSheet.create({
   },
   fallbackText: {
     fontSize: 16,
-    color: Colors.primary200,
+    color: '#808080',
   },
 });

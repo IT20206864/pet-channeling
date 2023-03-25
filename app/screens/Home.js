@@ -1,7 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, TouchableNativeFeedback, Image } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 const Home = ({ navigation }) => {
@@ -41,7 +40,7 @@ const Home = ({ navigation }) => {
           </View>
         </TouchableNativeFeedback>
         <TouchableNativeFeedback
-        //onPress={() => navigation.navigate("Admin View Complaints")}
+          onPress={() => navigation.navigate("AllPets")}
         >
           <View style={[styles.card, styles.lastCard]}>
             <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
@@ -54,6 +53,12 @@ const Home = ({ navigation }) => {
           <View style={[styles.card, styles.lastCard]}>
             <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
             <Text style={styles.cardTitle}>View Channelings</Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Bid')}>
+          <View style={styles.card}>
+            <FontAwesome5 name="dog" size={28} color="red" style={styles.cardIcon} />
+            <Text style={styles.cardTitle}>Place Bid</Text>
           </View>
         </TouchableNativeFeedback>
       </View>

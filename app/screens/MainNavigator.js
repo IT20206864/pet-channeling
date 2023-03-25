@@ -10,6 +10,18 @@ import ViewStaff from './Staff/ViewStaff';
 import EditStaff from './Staff/EditStaff';
 import StaffManagement from './Staff/StaffManagement';
 import ViewChannelings from './Channeling/ViewChannelings';
+import EditChanneling from './Channeling/EditChanneling';
+import Success from '../components/Success';
+
+import AllPets from './Pet/AllPets';
+import AddPet from './Pet/AddPet';
+import PetDetails from './Pet/PetDetails';
+import IconButton from '../components/UI/IconButton';
+import Map from './Pet/Map';
+import AddBid from './Pet/AddBid';
+import ViewBid from './Pet/ViewBid';
+import EditBid from './Pet/EditBid';
+import Bid from './Pet/Bid';
 
 export default function MainNavigator() {
   const Stack = createNativeStackNavigator();
@@ -23,7 +35,11 @@ export default function MainNavigator() {
     },
   };
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#053f5c' },
+        headerTintColor: '#ffffff',
+      }}>
 
       <Stack.Screen name="Home" component={Home} options={headerOptions} />
       <Stack.Screen name="AddStaff" component={AddStaff} options={headerOptions} />
@@ -35,8 +51,42 @@ export default function MainNavigator() {
       <Stack.Screen name="Edit Review" component={EditReview} options={headerOptions} />
       <Stack.Screen name="Channel Doctor" component={ChannelDoc} options={headerOptions} />
       <Stack.Screen name="View Channelings" component={ViewChannelings} options={headerOptions} />
-
-
+      <Stack.Screen
+        name="AllPets"
+        component={AllPets}
+        options={({ navigation }) => ({
+          title: 'Your Favorite Pets',
+          headerRight: ({ tintColor }) => (
+            <IconButton
+              icon="add"
+              size={24}
+              color={tintColor}
+              onPress={() => navigation.navigate('AddPet')}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="AddPet"
+        component={AddPet}
+        options={{
+          title: 'Add a new Pet',
+        }}
+      />
+      <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen
+        name="PetDetails"
+        component={PetDetails}
+        options={{
+          title: 'Loading Pet...',
+        }}
+      />
+      <Stack.Screen name="AddBid" component={AddBid} options={headerOptions} />
+      <Stack.Screen name="ViewBid" component={ViewBid} options={headerOptions} />
+      <Stack.Screen name="EditBid" component={EditBid} options={headerOptions} />
+      <Stack.Screen name="Bid" component={Bid} options={headerOptions} />
+      <Stack.Screen name="Update Channeling" component={EditChanneling} options={headerOptions} />
+      <Stack.Screen name="Success Screen" component={Success} options={headerOptions} />
     </Stack.Navigator>
   );
 }

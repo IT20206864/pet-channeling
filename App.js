@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 
-import AllPets from './app/screens/AllPets';
-import AddPet from './app/screens/AddPet';
-import IconButton from './app/components/UI/IconButton';
-import { Colors } from './app/constants/colors';
-import Map from './app/screens/Map';
 import { init } from './app/util/database';
-import PetDetails from './app/screens/PetDetails';
+
 import MainNavigator from './app/screens/MainNavigator';
+import { ToastProvider } from 'react-native-toast-notifications';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -32,51 +29,12 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <>
-      <StatusBar style="dark" />
+    <ToastProvider>
       <NavigationContainer>
-        {/*  <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: Colors.primary500 },
-            headerTintColor: Colors.gray700,
-            contentStyle: { backgroundColor: Colors.gray700 },
-          }}
-        >
-          <Stack.Screen
-            name="AllPets"
-            component={AllPets}
-            options={({ navigation }) => ({
-              title: 'Your Favorite Pets',
-              headerRight: ({ tintColor }) => (
-                <IconButton
-                  icon="add"
-                  size={24}
-                  color={tintColor}
-                  onPress={() => navigation.navigate('AddPet')}
-                />
-              ),
-            })}
-          />
-          <Stack.Screen
-            name="AddPet"
-            component={AddPet}
-            options={{
-              title: 'Add a new Pet',
-            }}
-          />
-          <Stack.Screen name="Map" component={Map} />
-          <Stack.Screen
-            name="PetDetails"
-            component={PetDetails}
-            options={{
-              title: 'Loading Pet...',
-            }}
-          />
-        </Stack.Navigator> */}
         <MainNavigator />
       </NavigationContainer>
-    </>
-  );
+    </ToastProvider>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -87,3 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
+

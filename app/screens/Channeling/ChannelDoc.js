@@ -1,66 +1,141 @@
 import React, { useState, useEffect } from 'react';
+import { useToast } from "react-native-toast-notifications";
 import {
-    Button,
     View,
     Text,
-    StyleSheet,
     TextInput,
     ScrollView,
     TouchableOpacity,
-    DatePickerIOS,
     Alert,
     Image,
+    Pressable
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { commonStyles, channelingStyles } from '../../styles';
+import { channelingStyles } from '../../styles';
 import * as ImagePicker from 'expo-image-picker';
+import { addDoc, collection, onSnapshot } from '@firebase/firestore';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { db } from '../../config';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 function ChannelDoc({ navigation, route }) {
-    // Fetch booking and see available times
-    const [description, setDescription] = useState();
-    // Get name , pets from login info
+
+    const [description, setDescription] = useState('');
     const [pets, setPets] = useState([
         { label: 'Tommy - Dog  ', value: 'Tommy - Dog' },
         { label: 'Kitty - Cat', value: 'Kitty - Cat' },
     ]);
-    const [date, setDate] = useState(new Date());
+    const [doctors, setDoctors] = useState([]);
+    const [date, setDat] = useState(new Date());
     const [dropDownOpen, setDropdownOpen] = useState(false);
     const [selectedPet, setSelectedPet] = useState(null);
-    const [fileUri, setFileUri] = useState();
+    const [DocDropDownOpen, setDocDropdownOpen] = useState(false);
+    const [selectedDoc, setSelectedDoc] = useState(null);
+    const [fileUri, setFileUri] = useState(null);
+    const [loading, setLoading] = useState(false);
     const ownerName = "Shehan"
+    const toast = useToast();
 
-    function AddReservation() {
+    const setDate = (event, date) => {
+        const {
+            nativeEvent: { timestamp },
+        } = event;
+        setDat(new Date(timestamp))
+        console.log(timestamp);
+    };
 
+    // Fetch Doctors 
+    useEffect(() => {
+        const colRef = collection(db, 'bid');
+        onSnapshot(colRef, (QuerySnapshot) => {
+            const doctors = [];
+            QuerySnapshot.forEach((doc) => {
+                const { fullname } = doc.data();
+                const docId = doc.id;
+                doctors.push({
+                    label: fullname,
+                    value: fullname,
+                });
+            });
+            setDoctors(doctors);
+        });
+    }, []);
+
+    async function AddReservation() {
+        try {
+            if (selectedDoc === undefined || selectedPet === undefined || date === undefined) {
+                alert('Veterinary , pet name and date are mandatory !');
+                return;
+            }
+            else {
+                setLoading(true);
+                uploadImage(async (imageUri) => {
+                    await addDoc(collection(db, 'channelings'), {
+                        date: date.toString(),
+                        description: "description",
+                        vetName: selectedDoc,
+                        image: imageUri,
+                        petName: selectedPet,
+                        ownerName: ownerName,
+                    }).then(() => {
+                        setLoading(false);
+                        toast.show("Reservation Created", {
+                            type: "success",
+                            placement: "bottom",
+                            duration: 4000,
+                            offset: 30,
+                            animationType: "slide-in",
+                        });
+                        setTimeout(() => {
+                            navigation.navigate('Success Screen')
+                        }, 4000)
+                    }).catch((err) => {
+                        setLoading(false);
+                        console.log(err);
+                        toast.show("Failed to create reservation ! ", {
+                            type: "danger",
+                            placement: "bottom",
+                            duration: 4000,
+                            offset: 30,
+                            animationType: "slide-in",
+                        });
+                    })
+                })
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     //called to upload selected image to firebase storage
-    const uploadImage = async () => {
+    const uploadImage = async (callback) => {
         if (fileUri) {
             const response = await fetch(fileUri);
             const blob = await response.blob();
-
             const storage = getStorage();
             const storageRef = ref(storage, `chanelling/images/${fileUri.split('/').pop()}`);
-
             const uploadTask = uploadBytesResumable(storageRef, blob);
 
             uploadTask.on(
                 'state_changed',
                 (snapshot) => { },
                 (error) => {
-                    ToastAndroid.show('Error Making Reservation!', ToastAndroid.SHORT);
+                    console.log(error);
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log(downloadURL);
+                        callback(downloadURL);
                     });
                 }
             );
         }
-    };
+        else {
+            callback('');
+        }
+    }
 
     async function chooseImage() {
-
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
@@ -68,10 +143,10 @@ function ChannelDoc({ navigation, route }) {
             quality: 1,
         });
         console.log(result);
-
         if (!result.canceled) {
             console.log(result.assets[0].uri)
             setFileUri(result.assets[0].uri);
+            console.log(fileUri);
         }
     };
 
@@ -85,10 +160,9 @@ function ChannelDoc({ navigation, route }) {
                     mediaTypes: ImagePicker.MediaTypeOptions.Images,
                     allowsEditing: true,
                     aspect: [4, 3],
-                    quality: 1, r
+                    quality: 1
                 })
                 console.log(result);
-
                 if (!result.canceled) {
                     setFileUri(result.assets[0].uri);
                 }
@@ -100,43 +174,28 @@ function ChannelDoc({ navigation, route }) {
                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                 allowsEditing: true,
                 aspect: [4, 3],
-                quality: 1, r
+                quality: 1
             })
             console.log(result);
-
             if (!result.canceled) {
                 setFileUri(result.assets[0].uri);
             }
         }
-
-
     };
-    const renderFileUri = () => {
-        if (fileUri) {
-            return (
-                <> <Image source={{ fileUri: fileUri }} style={channelingStyles.imageContainer} /> </>
-            )
-        } else {
-            return null;
-        }
-    }
-
-    // Succeess message , evey channeling will be Rs. 1000 , to paid at the premises ,
-    // if no show penalty of Rs. 2000
-    // Create booking with receipt object
     return (
         <>
             <View style={channelingStyles.container}>
+
                 <Text style={channelingStyles.header}>Make a reservation</Text>
+                {loading ? <LoadingIndicator /> : null}
                 <ScrollView style={channelingStyles.formContainer}>
-                    <Text style={channelingStyles.label}>Owner Name</Text>
+                    <Text style={channelingStyles.label1}>Owner Name</Text>
                     <TextInput
                         style={channelingStyles.textInput}
                         value={ownerName}
                         editable={false}
                         placeholderTextColor="#b5b5ba"
                     />
-                    <Text style={channelingStyles.label}>Select Pet</Text>
                     <DropDownPicker
                         value={selectedPet}
                         items={pets}
@@ -147,32 +206,59 @@ function ChannelDoc({ navigation, route }) {
                         listMode="SCROLLVIEW"
                         dropDownContainerStyle={channelingStyles.dropDownContainer}
                         style={channelingStyles.dropDown}
+                        placeholder="Select your Pet"
                         selectedItemLabelStyle={channelingStyles.dropDownSelected}
                         labelStyle={channelingStyles.dropDownLabel}
                         listItemLabelStyle={channelingStyles.dropDownLabel}
                         placeholderStyle={channelingStyles.dropDownPlaceholder}
                     />
-                    <Text style={channelingStyles.label}>Select Date and Time</Text>
+                    <DropDownPicker
+                        value={selectedDoc}
+                        items={doctors}
+                        open={DocDropDownOpen}
+                        setOpen={setDocDropdownOpen}
+                        setValue={setSelectedDoc}
+                        setItems={setDoctors}
+                        listMode="SCROLLVIEW"
+                        placeholder="Select a veterinarian"
+                        dropDownContainerStyle={channelingStyles.dropDownContainer}
+                        style={channelingStyles.dropDown}
+                        selectedItemLabelStyle={channelingStyles.dropDownSelected}
+                        labelStyle={channelingStyles.dropDownLabel}
+                        listItemLabelStyle={channelingStyles.dropDownLabel}
+                        placeholderStyle={channelingStyles.dropDownPlaceholder}
+                    />
+                    <Text style={channelingStyles.label2}>Select Date and Time</Text>
                     <View style={channelingStyles.dateContainer}>
-                        <DatePickerIOS
-                            date={date} onDateChange={setDate}
+                        <DateTimePicker
+                            mode="datetime"
+                            value={new Date(date)}
+                            minuteInterval={10}
+                            minimumDate={new Date(Date.now())}
+                            onChange={setDate}
                         />
                     </View>
-                    <Text style={channelingStyles.label}>Enter a Description</Text>
                     <TextInput
                         multiline={true}
                         placeholder="Enter a brief description of what's wrong"
                         onChange={setDescription}
                         placeholderTextColor="#b5b5ba"
                         value={description}
+                        style={channelingStyles.multiline}
                     />
-                    <Text style={channelingStyles.label}>Pick Image from Camera Or Gallery</Text>
+                    <Text style={channelingStyles.label1}>Pick Image from Camera Or Gallery</Text>
                     <View style={channelingStyles.ImageSections}>
-                        {/* <View>{renderFileUri}</View> */}
-                        <Image source={{ fileUri: fileUri }} style={channelingStyles.imageContainer} />
+                        {/* {fileUri && (
+                            <Image source={{ uri: fileUri }} style={channelingStyles.image} />
+                        )} */}
+                        {fileUri && (
+                            <Pressable>
+                                <Image source={{ uri: fileUri }} style={channelingStyles.image} />
+                            </Pressable>
+                        )}
                     </View>
 
-                    <View style={channelingStyles.btnParentSection}>
+                    <View style={channelingStyles.imageBtns}>
                         <TouchableOpacity
                             onPress={() => chooseImage()}
                             style={channelingStyles.cameraBtn}>
@@ -181,8 +267,8 @@ function ChannelDoc({ navigation, route }) {
 
                         <TouchableOpacity
                             onPress={() => cameraCapture()}
-                            style={channelingStyles.btnSection}>
-                            <Text style={channelingStyles.cameraBtnText}>Directly Launch Camera</Text>
+                            style={channelingStyles.cameraBtn}>
+                            <Text style={channelingStyles.cameraBtnText}>Capture Image</Text>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
