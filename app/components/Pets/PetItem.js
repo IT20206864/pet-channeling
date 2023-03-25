@@ -5,7 +5,6 @@
 */
 
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Colors } from '../../constants/colors';
 
 
 /**
@@ -60,10 +59,10 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 18,
-    color: Colors.gray700,
+    color: '#ffffff',
   },
   address: {
     fontSize: 12,
-    color: Colors.gray700,
+    color: '#ffffff',
   },
 });
