@@ -1,14 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AppLoading from 'expo-app-loading';
+
+import { init } from './app/util/database';
+
 import MainNavigator from './app/screens/MainNavigator';
+import { ToastProvider } from 'react-native-toast-notifications';
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [dbInitialized, setDbInitialized] = useState(false);
+
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialized(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  if (!dbInitialized) {
+    return <AppLoading />;
+  }
   return (
-    <NavigationContainer>
-      <MainNavigator />
-    </NavigationContainer>
-  );
+    <ToastProvider>
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
+    </ToastProvider>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -19,3 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
+

@@ -1,3 +1,9 @@
+/**
+* A screen component that allows a user to edit a bid record
+* @param {Object} route - The route object containing data about the screen's route
+* @param {Object} navigation - The navigation object containing methods for navigating between screens
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
@@ -9,39 +15,34 @@ import {
   ScrollView,
   TouchableOpacity,
   ToastAndroid,
+  Image
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { addDoc, collection, updateDoc, doc } from 'firebase/firestore';
-import Toggle from 'react-native-toggle-element';
+import { updateDoc, doc } from 'firebase/firestore';
 
-import { Icon } from '@rneui/themed';
-
-const EditStaff = ({ route, navigation }) => {
+const EditBid = ({ route, navigation }) => {
   const [fullname, setfullname] = useState(route.params.data.fullname);
   const [email, setemail] = useState(route.params.data.email);
   const [contactNo, setcontactNo] = useState(route.params.data.contactNo);
-
-  const [categories, setcategories] = useState([
-    { label: 'Veterinarian  ', value: 'Veterinarian' },
-    { label: 'Veterinary Technician', value: 'Veterinary Technician' },
-  ]);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [selectedCategory, setselectedCategory] = useState(route.params.data.stafftype);
   const [theme, setTheme] = useState('light');
-  const [toggleValue, setToggleValue] = useState(true);
+  const [categories, setcategories] = useState([
+    { label: 'Dog', value: 'Dog' },
+    { label: 'Hippopotamus', value: 'Hippopotamus' },
+    { label: 'Cat', value: 'Cat' },
+    { label: 'Bird', value: 'Bird' },
+    { label: 'Snake', value: 'Snake' },
+    { label: 'Monkey', value: 'Monkey' },
+    { label: 'Fish', value: 'Fish' },
+  ]);
 
   const styles = getStyles(theme);
-
-  const toggleTheme = (newState) => {
-    setToggleValue(newState);
-    console.log(newState);
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
 
   const showConfirmDialog = () => {
     return Alert.alert(
       'Are your sure?',
-      'Are you sure you want to Update this Staff Member? This action cannot be undone!',
+      'Are you sure you want to Update this Bid Member? This action cannot be undone!',
       [
         {
           text: 'Yes',
@@ -62,7 +63,7 @@ const EditStaff = ({ route, navigation }) => {
   };
 
   async function updateStaff() {
-    const ref = doc(db, 'staff', route.params.data.staffId);
+    const ref = doc(db, 'bid', route.params.data.staffId);
     await updateDoc(ref, {
       fullname: fullname,
       email: email,
@@ -70,8 +71,8 @@ const EditStaff = ({ route, navigation }) => {
       contactNo: contactNo,
     })
       .then(async () => {
-        showToast('Staff Member Updated Successfully!');
-        navigation.navigate('ViewStaff');
+        showToast('Bid Record Updated Successfully!');
+        navigation.navigate('ViewBid');
       })
       .catch((error) => {
         alert(error.message);
@@ -82,23 +83,13 @@ const EditStaff = ({ route, navigation }) => {
     <>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.toggleContainer}>
-            <Toggle
-              value={toggleValue}
-              onPress={() => toggleTheme(toggleValue)}
-              thumbActiveComponent={<Icon name="sun" type="fontisto" color="gray" />}
-              thumbInActiveComponent={<Icon name="night-clear" type="fontisto" color="gray" />}
-              trackBar={{
-                activeBackgroundColor: '#9ee3fb',
-                inActiveBackgroundColor: '#3c4145',
-                borderActiveColor: '#86c3d7',
-                borderInActiveColor: '#1c1c1c',
-                borderWidth: 5,
-                width: 100,
-              }}
-            />
-          </View>
-          <Text style={styles.header}>Edit Staff</Text>
+          <Text style={styles.logoText}>Edit Bid Record</Text>
+          <Text style={styles.heading2}>In the screen you would be able to modify your placed bids</Text>
+          <Image
+            resizeMode="contain"
+            source={require('../../assets/pet3.png')}
+            style={styles.logo}
+          />
           <Text style={styles.label}>Full Name</Text>
           <TextInput
             style={styles.textInput}
@@ -110,15 +101,15 @@ const EditStaff = ({ route, navigation }) => {
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Email"
+            placeholder="Enter your Email"
             placeholderTextColor="#b5b5ba"
             onChangeText={setemail}
             value={email}
           ></TextInput>
           <View style={{ zIndex: 1000 }}>
-            <Text style={styles.label}>Staff Type</Text>
+            <Text style={styles.label}>Select Pet type</Text>
             <DropDownPicker
-              placeholder="Select Staff type"
+              placeholder="Select Pet type"
               open={categoryOpen}
               value={selectedCategory}
               items={categories}
@@ -134,11 +125,11 @@ const EditStaff = ({ route, navigation }) => {
               placeholderStyle={styles.dropDownPlaceholder}
             />
 
-            <Text style={styles.label}>Contact No</Text>
+            <Text style={styles.label}>Contact Number</Text>
           </View>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Contact No"
+            placeholder="Enter Phone Number"
             placeholderTextColor="#b5b5ba"
             value={contactNo}
             onChangeText={setcontactNo}
@@ -158,7 +149,7 @@ const EditStaff = ({ route, navigation }) => {
               alignItems: 'center',
             }}
           >
-            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Update Staff</Text>
+            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Update Bid Record</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -168,38 +159,35 @@ const EditStaff = ({ route, navigation }) => {
 const getStyles = (theme) =>
   StyleSheet.create({
     container: {
-      paddingTop: 30,
+      paddingTop: 20,
       flex: 1,
-      backgroundColor: theme === 'light' ? '#fff' : '#333',
       flexDirection: 'column',
+      marginBottom: 40
     },
     header: {
-      color: theme === 'light' ? '#000000' : '#fff',
       paddingBottom: 10,
       fontSize: 25,
       fontWeight: 'bold',
     },
     textInput: {
-      backgroundColor: theme === 'light' ? '#F3F1F1' : '#fff',
       padding: 10,
       height: 40,
       width: '100%',
       fontSize: 18,
       marginBottom: 10,
       color: '#4A4A4A',
+      backgroundColor: '#E5E4E2',
     },
     label: {
       marginVertical: 5,
       fontSize: 18,
-      color: theme === 'light' ? '#808080' : '#fff',
-      paddingBottom: 20,
+      paddingBottom: 5,
     },
     scrollContainer: {
       padding: 10,
       alignContent: 'center',
     },
     dropDown: {
-      backgroundColor: '#F3F1F1',
       height: 40,
       width: '100%',
       padding: 10,
@@ -208,9 +196,9 @@ const getStyles = (theme) =>
       marginBottom: 10,
       borderWidth: 0,
       color: '#4A4A4A',
-
+      backgroundColor: '#E5E4E2',
       alignSelf: 'center',
-      marginVertical: 10,
+      marginVertical: 0,
     },
     dropDownContainer: {
       borderWidth: 0,
@@ -236,21 +224,16 @@ const getStyles = (theme) =>
       color: '#b5b5ba',
       fontSize: 18,
     },
-    toggleButton: {
-      backgroundColor: theme === 'light' ? '#555' : '#fff',
-      borderRadius: 5,
-      padding: 10,
-      width: '70%',
-      alignItems: 'left',
+    logoText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#000000',
     },
-    toggleText: {
-      color: theme === 'light' ? '#fff' : '#333',
-      fontSize: 16,
-    },
-    toggleContainer: {
-      justifyContent: 'flex-end',
-      flexDirection: 'row',
+    heading2: {
+      fontSize: 15,
+      color: '#000000',
+      paddingBottom: 40
     },
   });
 
-export default EditStaff
+export default EditBid

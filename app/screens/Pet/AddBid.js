@@ -1,3 +1,10 @@
+/**
+ * Add Bid Component
+ * @description A component to add a new bid to the database.
+ * @param {Object} navigation - The navigation object used for navigating between screens.
+ * @returns A JSX element containing form fields for adding a new bid.
+*/
+
 import React, { useState } from 'react';
 import { db } from '../../config';
 import {
@@ -8,38 +15,33 @@ import {
   ScrollView,
   TouchableOpacity,
   ToastAndroid,
+  Image
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { addDoc, collection } from 'firebase/firestore';
-import Toggle from 'react-native-toggle-element';
-import { Icon } from '@rneui/themed';
 
-const AddStaff = ({ navigation }) => {
+const AddBid = ({ navigation }) => {
   const [fullname, setfullname] = useState('');
   const [email, setemail] = useState('');
   const [contactNo, setcontactNo] = useState('');
-
-  const [categories, setcategories] = useState([
-    { label: 'Veterinarian  ', value: 'Veterinarian' },
-    { label: 'Veterinary Technician', value: 'Veterinary Technician' },
-  ]);
   const [categoryOpen, setcategoryOpen] = useState(false);
   const [selectedCategory, setselectedCategory] = useState(null);
   const [theme, setTheme] = useState('light');
-  const [toggleValue, setToggleValue] = useState(true);
+  const [categories, setcategories] = useState([
+    { label: 'Dog', value: 'Dog' },
+    { label: 'Hippopotamus', value: 'Hippopotamus' },
+    { label: 'Cat', value: 'Cat' },
+    { label: 'Bird', value: 'Bird' },
+    { label: 'Snake', value: 'Snake' },
+    { label: 'Monkey', value: 'Monkey' },
+    { label: 'Fish', value: 'Fish' },
+  ]);
 
   const styles = getStyles(theme);
 
-  //change theme
-  const toggleTheme = (newState) => {
-    setToggleValue(newState);
-    console.log(newState);
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
-  //Add staff member
-  async function saveStaff() {
-    await addDoc(collection(db, 'staff'), {
+  //Add bid member
+  async function saveStaff(async) {
+    await addDoc(collection(db, 'bid'), {
       fullname: fullname,
       email: email,
       stafftype: selectedCategory,
@@ -51,23 +53,48 @@ const AddStaff = ({ navigation }) => {
         setemail('');
         setcontactNo('');
         setselectedCategory(null);
-        showToast('Staff Member Added Successfully!');
-        navigation.navigate('ViewStaff');
+        showToast('Bid Record Added Successfully!');
+        navigation.navigate('ViewBid');
       })
       .catch((error) => {
         alert(error.message);
       });
   }
 
-  function AddStaff() {
-    console.log('but');
+  // Validation
+  function AddBid() {
+
+    // Check that fullname, email, and contactNo are all strings
+    if (typeof fullname !== 'string' || typeof email !== 'string' || typeof contactNo !== 'string') {
+      alert('Name, Mail, and Phone must be strings');
+      return;
+    }
+
+    // Check if input feilds are not empty
     if (fullname.length == 0 || email.length == 0 || contactNo.length == 0) {
       alert('The fields Name, Mail and Phone are required');
       return;
     }
+
+    // Validate email format and extension
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email) || !email.endsWith('.com')) {
+      alert('Please enter a valid email address with the ".com" and "@" extension');
+      return;
+    }
+
+    // Validate contact number format
+    const contactRegex = /^\d{10}$/;
+    if (!contactRegex.test(contactNo)) {
+      alert('Please enter a valid 10-digit contact number');
+      return;
+    }
+
+    console.log('Record Successfully added');
     saveStaff();
   }
 
+  // Increasing user experience
   function clearStaff() {
     setfullname('');
     setemail('');
@@ -84,25 +111,14 @@ const AddStaff = ({ navigation }) => {
     <>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.toggleContainer}>
-            <Toggle
-              value={toggleValue}
-              onPress={() => toggleTheme(toggleValue)}
-              thumbActiveComponent={<Icon name="sun" type="fontisto" color="gray" />}
-              thumbInActiveComponent={<Icon name="night-clear" type="fontisto" color="gray" />}
-              trackBar={{
-                activeBackgroundColor: '#9ee3fb',
-                inActiveBackgroundColor: '#3c4145',
-                borderActiveColor: '#86c3d7',
-                borderInActiveColor: '#1c1c1c',
-                borderWidth: 5,
-                width: 100,
-              }}
-            />
-          </View>
-
-          <Text style={styles.header}>Add New Staff</Text>
-          <Text style={styles.label}>Full Name</Text>
+          <Text style={styles.logoText}>Add Bid Record</Text>
+          <Text style={styles.heading2}>In the screen you would be able to create a new bids</Text>
+          <Image
+            resizeMode="contain"
+            source={require('../../assets/pet4.png')}
+            style={styles.logo}
+          />
+          <Text style={styles.label}>Enter your Full Name</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Enter Full Name"
@@ -110,7 +126,7 @@ const AddStaff = ({ navigation }) => {
             onChangeText={setfullname}
             value={fullname}
           ></TextInput>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>Your Email</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Enter Email"
@@ -120,9 +136,9 @@ const AddStaff = ({ navigation }) => {
             keyboardType="email-address"
           ></TextInput>
           <View style={{ zIndex: 1000 }}>
-            <Text style={styles.label}>Staff Type</Text>
+            <Text style={styles.label}>Pet Type</Text>
             <DropDownPicker
-              placeholder="Select Staff type"
+              placeholder="Select Pet type"
               open={categoryOpen}
               value={selectedCategory}
               items={categories}
@@ -142,7 +158,7 @@ const AddStaff = ({ navigation }) => {
           </View>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Contact No"
+            placeholder="Enter Phone Number"
             placeholderTextColor="#b5b5ba"
             value={contactNo}
             onChangeText={setcontactNo}
@@ -151,7 +167,7 @@ const AddStaff = ({ navigation }) => {
           ></TextInput>
 
           <TouchableOpacity
-            onPress={() => AddStaff()}
+            onPress={() => AddBid()}
             activeOpacity={0.7}
             style={{
               height: 45,
@@ -162,7 +178,7 @@ const AddStaff = ({ navigation }) => {
               alignItems: 'center',
             }}
           >
-            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Save Staff</Text>
+            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Save Bid Record</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -176,7 +192,7 @@ const AddStaff = ({ navigation }) => {
               alignItems: 'center',
             }}
           >
-            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Clear</Text>
+            <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 18 }}>Clear Feilds</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -186,38 +202,36 @@ const AddStaff = ({ navigation }) => {
 const getStyles = (theme) =>
   StyleSheet.create({
     container: {
-      paddingTop: 30,
+      paddingTop: 20,
       flex: 1,
-      backgroundColor: theme === 'light' ? '#fff' : '#333',
       flexDirection: 'column',
+      marginBottom: 50,
     },
     header: {
-      color: theme === 'light' ? '#000000' : '#fff',
       paddingBottom: 10,
       fontSize: 25,
       fontWeight: 'bold',
     },
     textInput: {
-      backgroundColor: theme === 'light' ? '#F3F1F1' : '#fff',
       padding: 10,
       height: 40,
       width: '100%',
       fontSize: 18,
       marginBottom: 10,
       color: '#4A4A4A',
+      backgroundColor: '#E5E4E2',
     },
     label: {
       marginVertical: 5,
       fontSize: 18,
-      color: theme === 'light' ? '#808080' : '#fff',
-      paddingBottom: 20,
+      paddingBottom: 5,
     },
     scrollContainer: {
       padding: 10,
       alignContent: 'center',
     },
     dropDown: {
-      backgroundColor: '#F3F1F1',
+      backgroundColor: '#E5E4E2',
       height: 40,
       width: '100%',
       padding: 10,
@@ -226,12 +240,12 @@ const getStyles = (theme) =>
       marginBottom: 10,
       borderWidth: 0,
       color: '#4A4A4A',
-      borderWidth: 1,
+
       alignSelf: 'center',
-      marginVertical: 10,
+      marginVertical: 0,
     },
     dropDownContainer: {
-      borderWidth: 1,
+      borderWidth: 0,
       elevation: 1,
       shadowColor: '#000',
       alignSelf: 'center',
@@ -254,21 +268,16 @@ const getStyles = (theme) =>
       color: '#b5b5ba',
       fontSize: 18,
     },
-    toggleButton: {
-      backgroundColor: theme === 'light' ? '#555' : '#fff',
-      borderRadius: 5,
-      padding: 10,
-      width: '70%',
-      alignItems: 'left',
+    logoText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#000000',
     },
-    toggleText: {
-      color: theme === 'light' ? '#fff' : '#333',
-      fontSize: 16,
-    },
-    toggleContainer: {
-      justifyContent: 'flex-end',
-      flexDirection: 'row',
+    heading2: {
+      fontSize: 15,
+      color: '#000000',
+      paddingBottom: 40
     },
   });
 
-export default AddStaff;
+export default AddBid;
