@@ -38,7 +38,7 @@ const AddStaff = ({ navigation }) => {
   };
 
   //Add staff member
-  async function saveStaff(async) {
+  async function saveStaff() {
     await addDoc(collection(db, 'staff'), {
       fullname: fullname,
       email: email,
