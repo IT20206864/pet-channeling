@@ -27,7 +27,7 @@ function ChannelDoc({ navigation, route }) {
         { label: 'Kitty - Cat', value: 'Kitty - Cat' },
     ]);
     const [doctors, setDoctors] = useState([]);
-    const [date, setDat] = useState(new Date());
+    const [date, setDat] = useState(new Date("2023-03-27"));
     const [dropDownOpen, setDropdownOpen] = useState(false);
     const [selectedPet, setSelectedPet] = useState(null);
     const [DocDropDownOpen, setDocDropdownOpen] = useState(false);
@@ -47,7 +47,7 @@ function ChannelDoc({ navigation, route }) {
 
     // Fetch Doctors 
     useEffect(() => {
-        const colRef = collection(db, 'bid');
+        const colRef = collection(db, 'staff');
         onSnapshot(colRef, (QuerySnapshot) => {
             const doctors = [];
             QuerySnapshot.forEach((doc) => {
@@ -71,9 +71,10 @@ function ChannelDoc({ navigation, route }) {
             else {
                 setLoading(true);
                 uploadImage(async (imageUri) => {
+                    console.log(description);
                     await addDoc(collection(db, 'channelings'), {
                         date: date.toString(),
-                        description: "description",
+                        description: description,
                         vetName: selectedDoc,
                         image: imageUri,
                         petName: selectedPet,
@@ -241,7 +242,7 @@ function ChannelDoc({ navigation, route }) {
                     <TextInput
                         multiline={true}
                         placeholder="Enter a brief description of what's wrong"
-                        onChange={setDescription}
+                        onChangeText={setDescription}
                         placeholderTextColor="#b5b5ba"
                         value={description}
                         style={channelingStyles.multiline}
@@ -260,13 +261,13 @@ function ChannelDoc({ navigation, route }) {
 
                     <View style={channelingStyles.imageBtns}>
                         <TouchableOpacity
-                            onPress={() => chooseImage()}
+                            onPress={chooseImage}
                             style={channelingStyles.cameraBtn}>
                             <Text style={channelingStyles.cameraBtnText}>Choose File</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={() => cameraCapture()}
+                            onPress={cameraCapture}
                             style={channelingStyles.cameraBtn}>
                             <Text style={channelingStyles.cameraBtnText}>Capture Image</Text>
                         </TouchableOpacity>
