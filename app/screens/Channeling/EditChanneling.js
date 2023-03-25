@@ -37,7 +37,7 @@ export default function EditChanneling({ route, navigation }) {
     };
     // Fetch Doctors 
     useEffect(() => {
-        const colRef = collection(db, 'bid');
+        const colRef = collection(db, 'staff');
         onSnapshot(colRef, (QuerySnapshot) => {
             const doctors = [];
             QuerySnapshot.forEach((doc) => {
@@ -131,7 +131,7 @@ export default function EditChanneling({ route, navigation }) {
                     <TextInput
                         multiline={true}
                         placeholder="Enter a brief description of what's wrong"
-                        onChange={setDescription}
+                        onChangeText={setDescription}
                         placeholderTextColor="#b5b5ba"
                         value={description}
                         style={[channelingStyles.multiline, { marginTop: 5 }]}
