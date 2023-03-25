@@ -1,12 +1,15 @@
+// Import the SQLite library and the Pet model
 import * as SQLite from 'expo-sqlite';
-
 import { Pet } from '../models/pet';
 
+// Open a connection to the pets database
 const database = SQLite.openDatabase('pets.db');
 
+// Define a function to initialize the database
 export function init() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
+      // Execute an SQL statement to create the pets table if it doesn't exist
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS pets (
           id INTEGER PRIMARY KEY NOT NULL,
@@ -30,8 +33,10 @@ export function init() {
   return promise;
 }
 
+// Define a function to insert a new pet into the database
 export function insertPlace(pet) {
   const promise = new Promise((resolve, reject) => {
+    // Execute an SQL statement to insert the pet into the database
     database.transaction((tx) => {
       tx.executeSql(
         `INSERT INTO pets (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
@@ -49,9 +54,11 @@ export function insertPlace(pet) {
   return promise;
 }
 
+// Define a function to fetch all pets from the database
 export function fetchPlaces() {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
+      // Execute an SQL statement to select all pets from the database
       tx.executeSql(
         'SELECT * FROM pets',
         [],
@@ -84,6 +91,7 @@ export function fetchPlaces() {
   return promise;
 }
 
+// Define a function to fetch details for a specific pet from the database
 export function fetchPlaceDetails(id) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
